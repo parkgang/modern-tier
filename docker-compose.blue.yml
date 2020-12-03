@@ -1,0 +1,7 @@
+version: "3.3"
+
+services:
+  tomcat:
+    build: .
+    ports:
+      - 10001:8080
