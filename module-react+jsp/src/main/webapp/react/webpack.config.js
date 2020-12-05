@@ -1,13 +1,17 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const port = process.env.PORT || 3000;
-
 module.exports = {
   mode: "development",
   entry: "./src/index.js",
   output: {
     filename: "bundle.[hash].js",
+  },
+  devServer: {
+    // default contentBase는 public으로 확인됨
+    host: "localhost",
+    port: 3000,
+    open: true,
   },
   module: {
     rules: [
@@ -46,9 +50,4 @@ module.exports = {
       filename: "style.css",
     }),
   ],
-  devServer: {
-    host: "localhost",
-    port: port,
-    open: true,
-  },
 };
