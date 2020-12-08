@@ -19,7 +19,7 @@ export default class App extends Component {
         <Provider store={store}>
           <BrowserRouter>
             <Switch>
-              <Route exact path="/" component={DownContainer} />
+              <Route exact path="/react/dist" component={DownContainer} />
               <Route exact path="/test" component={UpContainer} />
               <Route /> {/* 404 error rendering */}
             </Switch>
