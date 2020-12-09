@@ -57,6 +57,10 @@ public class KakaoController extends HttpServlet {
                 result += line;
             }
             System.out.println("response body : " + result);
+
+            // react page forward test
+            // request.getRequestDispatcher("/react/dist/").forward(request, response);
+            response.sendRedirect("/react/dist/");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
