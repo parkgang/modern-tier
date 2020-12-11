@@ -8,6 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/*
+<%-- 서블릿 맵핑 예제1 --%>
+<%--    <form action="/api" method="get">--%>
+<%--        ID: <input type="text" name="id" value=""><br/>--%>
+<%--        PW: <input type="text" name="pw" value=""><br/>--%>
+<%--        <input type="submit" value="Submit">--%>
+<%--    </form>--%>
+*/
+
 @WebServlet(name = "ServletTest", urlPatterns = "/api")
 public class ServletTest extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
