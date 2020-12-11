@@ -22,24 +22,10 @@ modern-tier는 실제 LOL 전적 데이터를 기반하여
     </div>
     <div>
         <button id="kakaoLogin"
-                onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=3888fb0f3d1eb5652a4f2ec494a1d3a7&redirect_uri=http://localhost:8080/auth/callback&response_type=code&scope=profile,friends,talk_message'">
+                onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=3888fb0f3d1eb5652a4f2ec494a1d3a7&redirect_uri=http://localhost:8080/api/oauth/kakao&response_type=code&scope=profile,friends,talk_message'">
             kakao login
         </button>
     </div>
 </div>
 </body>
 </html>
-<%-- 카카오 로그인 예제1 --%>
-<%--
-        <button id="kakaoLogin"
-                onclick="window.open('https://kauth.kakao.com/oauth/authorize?client_id=3888fb0f3d1eb5652a4f2ec494a1d3a7&redirect_uri=http://localhost:8080/auth/callback&response_type=code&scope=friends,talk_message', 'kakao', 'width=420', 'height=600')">
-            kakao login
-        </button>
-        --%>
-
-<%-- 서블릿 맵핑 예제1 --%>
-<%--    <form action="/api" method="get">--%>
-<%--        ID: <input type="text" name="id" value=""><br/>--%>
-<%--        PW: <input type="text" name="pw" value=""><br/>--%>
-<%--        <input type="submit" value="Submit">--%>
-<%--    </form>--%>
