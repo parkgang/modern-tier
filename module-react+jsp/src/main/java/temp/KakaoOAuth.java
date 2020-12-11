@@ -1,4 +1,4 @@
-package com.api.kakao;
+package temp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +10,8 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-@WebServlet(name = "KakaoController", urlPatterns = "/auth/callback")
-public class KakaoController extends HttpServlet {
+@WebServlet(urlPatterns = "/auth/callback")
+public class KakaoOAuth extends HttpServlet {
     String access_Token = "";
     String refresh_Token = "";
     String reqURL = "https://kauth.kakao.com/oauth/token";
