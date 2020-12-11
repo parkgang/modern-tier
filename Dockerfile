@@ -1,5 +1,5 @@
 # 사용하는 이미지
-FROM tomcat
+FROM tomcat-modern-tier:1
 
 # 해당 이미지 shell command 실행
 RUN apt-get update
