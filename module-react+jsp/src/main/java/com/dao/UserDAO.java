@@ -14,15 +14,26 @@ public class UserDAO {
 
     private DataSource ds;
 
-    public UserDAO() throws Exception {
-        try {
-            String dbName = "jdbc/modern_tier";
-            Context context = new InitialContext();
-            ds = (DataSource) context.lookup("java:comp/env/" + dbName);
-        } catch (Exception ex) {
-            throw new Exception("DB연결 실패: ", ex);
-        }
+    private UserDAO() {
     }
+
+    private static class LazyHolder {
+        private static final UserDAO INSTANCE = new UserDAO();
+    }
+
+    public static UserDAO getInstance() {
+        return LazyHolder.INSTANCE;
+    }
+
+//    public UserDAO() throws Exception {
+//        try {
+//            String dbName = "jdbc/modern_tier";
+//            Context context = new InitialContext();
+//            ds = (DataSource) context.lookup("java:comp/env/" + dbName);
+//        } catch (Exception ex) {
+//            throw new Exception("DB연결 실패: ", ex);
+//        }
+//    }
 
     // 회원 가입
     public boolean userInsert(UserBean user) throws Exception {
