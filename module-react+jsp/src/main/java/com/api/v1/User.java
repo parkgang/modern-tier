@@ -14,4 +14,6 @@ public class User {
         // ㄴㄴ 이거는 세션 검증 용도로 사용하기
         System.out.println("user");
     }
+    // 로그아웃
+    // 연결끊기
 }

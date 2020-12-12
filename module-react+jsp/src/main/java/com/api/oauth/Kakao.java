@@ -2,6 +2,7 @@ package com.api.oauth;
 
 import com.constant.KakaoApp;
 import com.constant.Service;
+import com.dao.UserDAO;
 import com.dto.UserBean;
 import org.json.JSONObject;
 
@@ -164,6 +165,9 @@ public class Kakao {
             System.out.println(userBean.getKakao_email());
             System.out.println(userBean.getKakao_access_token());
             System.out.println(userBean.getKakao_refresh_token());
+
+            UserDAO userDAO = new UserDAO();
+            userDAO.userInsert(userBean);
 
             // react page forward test
             // request.getRequestDispatcher("/react/dist/").forward(request, response);
