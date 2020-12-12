@@ -23,7 +23,7 @@ import java.util.HashMap;
 @Path("oauth/kakao")
 public class Kakao {
 
-    private final String OAuth_Redirect_URI = "http://" + Service.LOCAL_IP + "/api/oauth/kakao";
+    private final String OAuth_Redirect_URI = "http://" + Service.USE_IP + "/api/oauth/kakao";
 
     private UserBean userBean;
 
