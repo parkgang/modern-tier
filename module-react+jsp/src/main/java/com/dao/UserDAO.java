@@ -32,34 +32,76 @@ public class UserDAO {
         return LazyHolder.INSTANCE;
     }
 
-    // 회원 가입
-    public boolean userInsert(UserBean user) throws Exception {
-
+    // 회원 정보 조회
+    public boolean isUser(UserBean user) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
-            int result;
-
             con = ds.getConnection();
 
-            String sql = "insert into user values (null, ?, ?, ?, ?, ?, null, null, null)";
+            String sql = "select * from user where kakao_id = ?;";
 
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, user.getKakao_id());
-            pstmt.setString(2, user.getKakao_nickname());
-            pstmt.setString(3, user.getKakao_email());
-            pstmt.setString(4, user.getKakao_access_token());
-            pstmt.setString(5, user.getKakao_refresh_token());
+            rs = pstmt.executeQuery();
 
-            result = pstmt.executeUpdate();
-
-            if (result == 0) {
-                return false;
-            } else {
-                System.out.println("삽입 성공");
+            if (rs.next())
                 return true;
+            else
+                return false;
+        } catch (Exception ex) {
+            throw new Exception(ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
+    }
+
+    // 회원 가입
+    public void userInsert(UserBean user) throws Exception {
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql;
+        int result;
+        try {
+            con = ds.getConnection();
+
+            // 사용자 존재
+            if (isUser(user)) {
+                sql = "update user set kakao_nickname=?, kakao_email=?, kakao_access_token=?, kakao_refresh_token=? where kakao_id = ?";
+
+                pstmt = con.prepareStatement(sql);
+                pstmt.setString(1, user.getKakao_nickname());
+                pstmt.setString(2, user.getKakao_email());
+                pstmt.setString(3, user.getKakao_access_token());
+                pstmt.setString(4, user.getKakao_refresh_token());
+                pstmt.setInt(5, user.getKakao_id());
+
+                result = pstmt.executeUpdate();
+            } else {
+                sql = "insert into user values (null, ?, ?, ?, ?, ?, null, null, null)";
+
+                pstmt = con.prepareStatement(sql);
+                pstmt.setInt(1, user.getKakao_id());
+                pstmt.setString(2, user.getKakao_nickname());
+                pstmt.setString(3, user.getKakao_email());
+                pstmt.setString(4, user.getKakao_access_token());
+                pstmt.setString(5, user.getKakao_refresh_token());
+
+                result = pstmt.executeUpdate();
             }
         } catch (SQLIntegrityConstraintViolationException ex) {
             throw new SQLIntegrityConstraintViolationException("중복되는 아이디가 존재합니다: ", ex);
