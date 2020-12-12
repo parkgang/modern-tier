@@ -32,7 +32,7 @@ public class UserDAO {
         return LazyHolder.INSTANCE;
     }
 
-    // 회원 정보 조회
+    // 중복되는 사용자를 구별하기 위해 회원 정보 조회
     public boolean isUser(UserBean user) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -79,7 +79,7 @@ public class UserDAO {
         try {
             con = ds.getConnection();
 
-            // 사용자 존재
+            // 사용자 존재시 정보 업데이트
             if (isUser(user)) {
                 sql = "update user set kakao_nickname=?, kakao_email=?, kakao_access_token=?, kakao_refresh_token=? where kakao_id = ?";
 
@@ -91,7 +91,9 @@ public class UserDAO {
                 pstmt.setInt(5, user.getKakao_id());
 
                 result = pstmt.executeUpdate();
-            } else {
+            }
+            // 존재하지 않으면 새로 생성
+            else {
                 sql = "insert into user values (null, ?, ?, ?, ?, ?, null, null, null)";
 
                 pstmt = con.prepareStatement(sql);

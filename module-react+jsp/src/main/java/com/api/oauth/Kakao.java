@@ -92,9 +92,8 @@ public class Kakao {
     }
 
     // 로그인한 사용자의 정보를 불러옵니다
-    public HashMap<String, Object> getUserInfo(String access_token) {
-        // 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
-        HashMap<String, Object> userInfo = new HashMap<>();
+    public void getUserInfo(String access_token) {
+
         final String Kakao_UserInfo_Req_URI = "https://kapi.kakao.com/v2/user/me";
 
         try {
@@ -137,17 +136,9 @@ public class Kakao {
             userBean.setKakao_id(id);
             userBean.setKakao_nickname(nickname);
             userBean.setKakao_email(email);
-
-            userInfo.put("id", id);
-            userInfo.put("nickname", nickname);
-            userInfo.put("email", email);
-            System.out.println("login Controller : " + userInfo);
-
-            return userInfo;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
     }
 
     @GET
@@ -159,7 +150,7 @@ public class Kakao {
 
             String access_token = getAccessToken(code);
 
-            HashMap<String, Object> userInfo = getUserInfo(access_token);
+            getUserInfo(access_token);
 
             System.out.println("UserBean 출력");
             System.out.println(userBean.getKakao_id());
@@ -175,10 +166,7 @@ public class Kakao {
             HttpSession session = req.getSession(true);
             session.setAttribute("kakao_id", userBean.getKakao_id());
 
-            // react page forward test
-            // request.getRequestDispatcher("/react/dist/").forward(request, response);
-            // response.sendRedirect("/react/dist/");
-            // URI uri = new URI("https://www.naver.com");
+            // 홈 화면인 react으로 이동
             URI uri = new URI("/react/dist/");
             return Response.seeOther(uri).build();
         } catch (Exception ex) {
