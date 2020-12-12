@@ -166,7 +166,7 @@ public class Kakao {
             System.out.println(userBean.getKakao_access_token());
             System.out.println(userBean.getKakao_refresh_token());
 
-            UserDAO userDAO = new UserDAO();
+            UserDAO userDAO = UserDAO.getInstance();
             userDAO.userInsert(userBean);
 
             // react page forward test
