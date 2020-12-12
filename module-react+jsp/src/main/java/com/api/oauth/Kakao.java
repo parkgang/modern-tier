@@ -6,16 +6,18 @@ import com.dao.UserDAO;
 import com.dto.UserBean;
 import org.json.JSONObject;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
@@ -149,7 +151,7 @@ public class Kakao {
     }
 
     @GET
-    public Response login(@QueryParam("code") String code) {
+    public Response login(@QueryParam("code") String code, @Context HttpServletRequest req) {
         try {
             userBean = new UserBean();
             // 인가 코드 확인
@@ -168,6 +170,10 @@ public class Kakao {
 
             UserDAO userDAO = UserDAO.getInstance();
             userDAO.userInsert(userBean);
+
+            // session 저장
+            HttpSession session = req.getSession(true);
+            session.setAttribute("kakao_id", userBean.getKakao_id());
 
             // react page forward test
             // request.getRequestDispatcher("/react/dist/").forward(request, response);
