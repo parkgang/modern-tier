@@ -22,7 +22,7 @@ modern-tier는 실제 LOL 전적 데이터를 기반하여
     </div>
     <div>
         <button id="kakaoLogin"
-                onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=3888fb0f3d1eb5652a4f2ec494a1d3a7&redirect_uri=http://localhost:8080/api/oauth/kakao&response_type=code&scope=profile,friends,talk_message'">
+                onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=3888fb0f3d1eb5652a4f2ec494a1d3a7&redirect_uri=http://localhost:8080/api/oauth/kakao&response_type=code&scope=profile,account_email,friends,talk_message'">
             kakao login
         </button>
     </div>
