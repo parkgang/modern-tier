@@ -27,3 +27,7 @@ from user;
 
 insert into user
 values (null, 2, null, null, null, null, null, null, 1);
+
+delete
+from user
+where id = 1;
