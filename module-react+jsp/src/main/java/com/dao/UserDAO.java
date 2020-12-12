@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.constant.Service;
 import com.dto.UserBean;
 
 import javax.naming.Context;
@@ -15,6 +16,12 @@ public class UserDAO {
     private DataSource ds;
 
     private UserDAO() {
+        try {
+            Context context = new InitialContext();
+            ds = (DataSource) context.lookup("java:comp/env/" + Service.DATABASE_NAME);
+        } catch (Exception ex) {
+            System.out.println("DB연결 실패: " + ex);
+        }
     }
 
     private static class LazyHolder {
@@ -24,16 +31,6 @@ public class UserDAO {
     public static UserDAO getInstance() {
         return LazyHolder.INSTANCE;
     }
-
-//    public UserDAO() throws Exception {
-//        try {
-//            String dbName = "jdbc/modern_tier";
-//            Context context = new InitialContext();
-//            ds = (DataSource) context.lookup("java:comp/env/" + dbName);
-//        } catch (Exception ex) {
-//            throw new Exception("DB연결 실패: ", ex);
-//        }
-//    }
 
     // 회원 가입
     public boolean userInsert(UserBean user) throws Exception {
