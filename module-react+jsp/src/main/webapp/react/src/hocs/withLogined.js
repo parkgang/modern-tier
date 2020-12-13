@@ -11,8 +11,7 @@ export default function (InputComponent) {
         console.log(res.data.kakao_id);
         const kakaoId = res.data.kakao_id;
         if (kakaoId === undefined) {
-          window.location.href =
-            'http://kyungeun.koreacentral.cloudapp.azure.com/views/kakaoOAuth/';
+          window.location.href = 'http://52.231.50.84/views/kakaoOAuth/';
         }
       });
     }, []);
