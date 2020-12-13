@@ -15,14 +15,10 @@ const DownCounter = ({ handleDownCount, data }) => {
         <button>업 카운터 이동</button>
       </Link>
       <div>
-        <a href="http://kyungeun.koreacentral.cloudapp.azure.com/api/v1/user/logout">
-          로그아웃
-        </a>
+        <a href="http://52.231.50.84/api/v1/user/logout">로그아웃</a>
       </div>
       <div>
-        <a href="http://kyungeun.koreacentral.cloudapp.azure.com/api/v1/user/unlink">
-          탈퇴
-        </a>
+        <a href="http://52.231.50.84/api/v1/user/unlink">탈퇴</a>
       </div>
     </>
   );

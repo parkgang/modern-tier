@@ -77,13 +77,13 @@ public class UserDAO {
         String sql;
         int result;
         try {
-            System.out.println("db 연결 시도");
+            // System.out.println("db 연결 시도");
             con = ds.getConnection();
-            System.out.println("db 연결 성공");
+            // System.out.println("db 연결 성공");
 
             // 사용자 존재시 정보 업데이트
             if (isUser(user)) {
-                System.out.println("사용자 존재시 정보 업데이트");
+                // System.out.println("사용자 존재시 정보 업데이트");
                 sql = "update user set kakao_nickname=?, kakao_email=?, kakao_access_token=?, kakao_refresh_token=? where kakao_id = ?";
 
                 pstmt = con.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class UserDAO {
             }
             // 존재하지 않으면 새로 생성
             else {
-                System.out.println("존재하지 않으면 새로 생성");
+                // System.out.println("존재하지 않으면 새로 생성");
                 sql = "insert into user values (null, ?, ?, ?, ?, ?, null, null, null)";
 
                 pstmt = con.prepareStatement(sql);
