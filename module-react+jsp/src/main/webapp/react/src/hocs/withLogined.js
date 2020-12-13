@@ -20,8 +20,10 @@ export default function (InputComponent) {
       <>
         <Header />
         <Profile />
-        <TabNavigator />
-        <InputComponent />
+        <div id="content">
+          <TabNavigator />
+          <InputComponent />
+        </div>
       </>
     );
   }
