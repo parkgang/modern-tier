@@ -122,4 +122,52 @@ public class UserDAO {
             }
         }
     }
+
+    // 서비스 탈퇴
+    public String userWithdrawal(int kakao_id) throws Exception {
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql;
+        String kakao_access_token = "";
+
+        try {
+            con = ds.getConnection();
+
+            // 조회
+            sql = "select kakao_access_token from user where kakao_id = ?";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, kakao_id);
+            rs = pstmt.executeQuery();
+
+            // 토큰 저장
+            if (rs.next()) {
+                kakao_access_token = rs.getString("kakao_access_token");
+            }
+
+            // 삭제
+            sql = "delete from user where kakao_id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, kakao_id);
+            int result = pstmt.executeUpdate();
+
+            return kakao_access_token;
+        } catch (Exception ex) {
+            throw new Exception(ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
+    }
 }

@@ -31,3 +31,18 @@ values (null, 2, null, null, null, null, null, null, 1);
 delete
 from user
 where id = 1;
+
+# 사용자 검색
+select *
+from user
+where kakao_id = 1536694714;
+
+# 사용자 수정
+update user
+set kakao_nickname='1',
+    kakao_email='2',
+    kakao_access_token='3',
+    kakao_refresh_token='4'
+where kakao_id = 1536694714;
+
+
