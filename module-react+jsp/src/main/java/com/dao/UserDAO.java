@@ -13,6 +13,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 public class UserDAO {
 
+    private static UserDAO instance = new UserDAO();
+
     private DataSource ds;
 
     private UserDAO() {
@@ -24,12 +26,8 @@ public class UserDAO {
         }
     }
 
-    private static class LazyHolder {
-        private static final UserDAO INSTANCE = new UserDAO();
-    }
-
     public static UserDAO getInstance() {
-        return LazyHolder.INSTANCE;
+        return instance;
     }
 
     // 중복되는 사용자를 구별하기 위해 회원 정보 조회
