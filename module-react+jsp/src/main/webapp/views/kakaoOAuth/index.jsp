@@ -2,12 +2,6 @@
 <%@ page import="com.constant.Service" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    /*
-    <button id="kakaoLogin"
-                onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=3888fb0f3d1eb5652a4f2ec494a1d3a7&redirect_uri=http://localhost:8080/api/oauth/kakao&response_type=code&scope=profile,account_email,friends,talk_message'">
-            kakao login
-        </button>
-     */
     final String KAKAO_OAUTH_URI = "https://kauth.kakao.com/oauth/authorize?client_id=" + KakaoApp.REST_API_KEY + "&redirect_uri=" + "http://" + Service.USE_IP + "/api/oauth/kakao&response_type=code&scope=profile,account_email,friends,talk_message";
 %>
 <!DOCTYPE html>
