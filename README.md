@@ -36,3 +36,7 @@ docker run -p 8888:8080 tomcat-modern-tier:1
 | edit     | 코드 수정                                                     |
 | refactor | 코드 및 프로젝트의 기능은 전혀 변함이 없으며 이름만 변경될 때 |
 | build    | cicd 빌드 트리거시 시용됨 사용시 이유를 작성하기              |
+
+# 이슈
+
+Kakao OAuth Redirect URI이 도메인이 아닌 public IP으로 넘어가서 서비스 접속시 public IP으로 들어가야합니다 
