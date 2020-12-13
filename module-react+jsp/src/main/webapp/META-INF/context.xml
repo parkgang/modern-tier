@@ -10,7 +10,6 @@
             driverClassName="com.mysql.cj.jdbc.Driver"
             url="jdbc:mysql://52.231.50.84:3306/modern_tier?serverTimezone=UTC"
             maxActive="20"
-            maxWait="-1"
             maxIdle="10"
     />
 </Context>
