@@ -15,13 +15,21 @@ public class UserDAO {
 
     private DataSource ds;
 
-    public UserDAO() {
+    private UserDAO() {
         try {
             Context context = new InitialContext();
             ds = (DataSource) context.lookup("java:comp/env/" + Service.DATABASE_NAME);
         } catch (Exception ex) {
             System.out.println("DB연결 실패: " + ex);
         }
+    }
+
+    private static class LazyHolder {
+        private static final UserDAO INSTANCE = new UserDAO();
+    }
+
+    public static UserDAO getInstance() {
+        return LazyHolder.INSTANCE;
     }
 
     // 중복되는 사용자를 구별하기 위해 회원 정보 조회
