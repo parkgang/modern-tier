@@ -24,7 +24,7 @@ const CompetitionList = () => {
   const competitionList = competitionData.map((x, index) => (
     <Competition key={index} id={x.id} name={x.name} />
   ));
-  return <div id="CompetitionList">{competitionList}</div>;
+  return <div id="competitionList">{competitionList}</div>;
 };
 
 export default CompetitionList;

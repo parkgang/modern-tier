@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Title</title>
     <link rel="stylesheet" href="index.css"/>
 </head>
@@ -26,9 +27,9 @@ modern-tier는 실제 LOL 전적 데이터를 기반하여
         </pre>
     </div>
     <div>
-        <button id="kakaoLogin" onclick="location.href='<%=KAKAO_OAUTH_URI%>'">
-            kakao login
-        </button>
+        <a href="<%=KAKAO_OAUTH_URI%>">
+            <img src="kakao_login_medium.png">
+        </a>
     </div>
 </div>
 </body>

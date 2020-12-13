@@ -27,7 +27,7 @@ const RankingList = () => {
   const rankingList = rankingData.map((x, index) => (
     <Ranking key={index} id={x.id} name={x.name} tier={x.tier} />
   ));
-  return <div id="RankingList">{rankingList}</div>;
+  return <div id="rankingList">{rankingList}</div>;
 };
 
 export default RankingList;

@@ -5,7 +5,7 @@ import './index.css';
 
 const Competition = ({ id, name }) => {
   return (
-    <div id={'Competition' + id} className="Competition">
+    <div id={'Competition' + id} className="competition">
       <span>{id}</span>
       <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span>{name}</span>

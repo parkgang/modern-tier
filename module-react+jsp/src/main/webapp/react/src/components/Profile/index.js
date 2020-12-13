@@ -4,7 +4,7 @@ import './index.css';
 
 const Profile = () => {
   return (
-    <div id="Profile">
+    <div id="profile">
       <div>
         <img
           width="100"

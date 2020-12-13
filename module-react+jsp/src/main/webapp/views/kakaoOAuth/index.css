@@ -1,7 +1,5 @@
 #root {
     text-align: center;
-    /*background-color: #00D8FF;*/
-    /*border: 1px solid #5D5D5D;*/
     position: absolute;
     height: 300px;
     width: 400px;
@@ -17,5 +15,5 @@
 }
 
 #root div.pre {
-    font-size: 14px;
+    font-size: 16px;
 }

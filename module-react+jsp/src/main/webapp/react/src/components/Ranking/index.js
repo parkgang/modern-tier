@@ -5,7 +5,7 @@ import './index.css';
 
 const Ranking = ({ id, name, tier }) => {
   return (
-    <div id={'Ranking' + id} className="Ranking">
+    <div id={'Ranking' + id} className="ranking">
       <span>{id}</span>
       <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span>{name}</span>

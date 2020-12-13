@@ -1,4 +1,4 @@
-#Profile {
+#profile {
   height: 150px;
   margin: 10px 10px 10px 10px;
   padding: 10px 10px 10px 10px;
@@ -6,6 +6,6 @@
   text-align: center;
 }
 
-#Profile img {
+#profile img {
   border-radius: 30%;
 }

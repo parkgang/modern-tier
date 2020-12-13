@@ -5,7 +5,7 @@ import './index.css';
 
 const TabNavigator = () => {
   return (
-    <div id="TabNavigator">
+    <div id="tabNavigator">
       <Link to={`/react/dist`}>
         <button>랭킹</button>
       </Link>

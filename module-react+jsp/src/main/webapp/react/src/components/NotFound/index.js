@@ -4,7 +4,7 @@ import './index.css';
 
 const NotFound = () => {
   return (
-    <div id="NotFound">
+    <div id="notFound">
       <div>
         <span>Not Found</span>
       </div>

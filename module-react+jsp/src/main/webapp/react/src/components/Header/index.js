@@ -8,7 +8,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <div id="Header">
+    <div id="header">
       <button onClick={() => dispatch(actions.logoutUser())}>로그아웃</button>
       <button onClick={() => dispatch(actions.unlinkUser())}>탈퇴</button>
     </div>
