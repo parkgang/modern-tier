@@ -28,6 +28,8 @@ public class User {
             JSONObject object = new JSONObject();
             object.put("kakao_id", kakao_id);
             return Response.status(Response.Status.OK).entity(object.toString()).build();
+        } catch (NullPointerException ex) {
+            System.out.println("알려진 예외: 로그인 되어있지 않은 사용자");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
