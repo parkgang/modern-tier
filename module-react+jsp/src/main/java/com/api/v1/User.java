@@ -1,17 +1,85 @@
 package com.api.v1;
 
+import com.dao.UserDAO;
+import org.json.JSONObject;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 
 @Path("/v1/user")
 public class User {
+
     @GET
     @Path("/login")
-    public void login() {
-        // 콜백된 access_token을 기반으로 실제 DB에 넣는 작업
-        // 이미 데이터 있다면 소환사 등록 여부에 따라 다른 페이지로 이동
-        // 인가코드 받고 -> 사용자 조회하고 -> db에 저장
-        // ㄴㄴ 이거는 세션 검증 용도로 사용하기
-        System.out.println("user");
+    @Produces(MediaType.APPLICATION_JSON)
+    // 로그인 확인
+    public Response login(@Context HttpServletRequest req) {
+        try {
+            int kakao_id = (int) req.getSession().getAttribute("kakao_id");
+
+            JSONObject object = new JSONObject();
+            object.put("kakao_id", kakao_id);
+            return Response.status(Response.Status.OK).entity(object.toString()).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    @GET
+    @Path("/logout")
+    // 로그아웃
+    public Response logout(@Context HttpServletRequest req) {
+        try {
+            req.getSession().removeAttribute("kakao_id");
+            URI uri = new URI("/react/dist/");
+            return Response.seeOther(uri).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    @GET
+    @Path("/unlink")
+    // 연결끊기
+    public Response unlink(@Context HttpServletRequest req) {
+        final String URI = "https://kapi.kakao.com/v1/user/unlink";
+
+        try {
+
+            int kakao_id = (int) req.getSession().getAttribute("kakao_id");
+
+            UserDAO userDAO = UserDAO.getInstance();
+            String access_token = userDAO.userWithdrawal(kakao_id);
+
+            URL url = new URL(URI);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+
+            // 요청에 필요한 Header에 포함될 내용
+            conn.setRequestProperty("Authorization", "Bearer " + access_token);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+            if (responseCode != 200) {
+                System.out.println("에러입니다. 로그를 확인해주세요.");
+            }
+
+            req.getSession().removeAttribute("kakao_id");
+            URI uri = new URI("/react/dist/");
+            return Response.seeOther(uri).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }

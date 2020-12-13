@@ -1,23 +1,23 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+
+import * as actions from '../../actions';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import './index.css';
 
-const UpCounter = ({ handleUpCount, data }) => {
+const counterSelector = (state) => state.upPage;
+
+const UpCounter = () => {
+  const dispatch = useDispatch();
+  const { tempNum } = useSelector(counterSelector);
+
   return (
     <Fragment>
-      <div>{data}</div>
-      <button onClick={handleUpCount}>올리기</button>
+      <div>{tempNum}</div>
+      <button onClick={() => dispatch(actions.upCount())}>올리기</button>
     </Fragment>
   );
-};
-
-UpCounter.propTypes = {
-  handleUpCount: PropTypes.func,
-  data: PropTypes.number,
-};
-UpCounter.defaultProps = {
-  data: 0,
 };
 
 export default UpCounter;
