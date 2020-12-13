@@ -13,21 +13,15 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 public class UserDAO {
 
-    private static UserDAO instance = new UserDAO();
-
     private DataSource ds;
 
-    private UserDAO() {
+    public UserDAO() {
         try {
             Context context = new InitialContext();
             ds = (DataSource) context.lookup("java:comp/env/" + Service.DATABASE_NAME);
         } catch (Exception ex) {
             System.out.println("DB연결 실패: " + ex);
         }
-    }
-
-    public static UserDAO getInstance() {
-        return instance;
     }
 
     // 중복되는 사용자를 구별하기 위해 회원 정보 조회

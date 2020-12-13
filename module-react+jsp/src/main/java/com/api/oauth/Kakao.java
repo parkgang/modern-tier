@@ -159,7 +159,7 @@ public class Kakao {
             System.out.println(userBean.getKakao_access_token());
             System.out.println(userBean.getKakao_refresh_token());
 
-            UserDAO userDAO = UserDAO.getInstance();
+            UserDAO userDAO = new UserDAO();
             userDAO.userInsert(userBean);
 
             // session 저장

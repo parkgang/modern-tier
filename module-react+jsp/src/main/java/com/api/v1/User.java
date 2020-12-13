@@ -58,7 +58,7 @@ public class User {
 
             int kakao_id = (int) req.getSession().getAttribute("kakao_id");
 
-            UserDAO userDAO = UserDAO.getInstance();
+            UserDAO userDAO = new UserDAO();
             String access_token = userDAO.userWithdrawal(kakao_id);
 
             URL url = new URL(URI);
