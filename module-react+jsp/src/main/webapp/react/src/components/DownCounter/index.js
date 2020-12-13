@@ -14,12 +14,6 @@ const DownCounter = ({ handleDownCount, data }) => {
       <Link to={`/test`}>
         <button>업 카운터 이동</button>
       </Link>
-      <div>
-        <a href="http://52.231.50.84/api/v1/user/logout">로그아웃</a>
-      </div>
-      <div>
-        <a href="http://52.231.50.84/api/v1/user/unlink">탈퇴</a>
-      </div>
     </>
   );
 };

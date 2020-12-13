@@ -1,0 +1,11 @@
+#Profile {
+  height: 150px;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+  border: 2px solid black;
+  text-align: center;
+}
+
+#Profile img {
+  border-radius: 30%;
+}

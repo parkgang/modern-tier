@@ -1,22 +1,23 @@
-import React, { Component, Fragment } from 'react';
-import { applyMiddleware, createStore } from 'redux';
+import React, { Component } from 'react';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import reducers from './reducers';
-import { logger } from './middlewares';
-
 import { withLogined } from './hocs';
-import { DownContainer, UpContainer } from './containers';
+import { RankingList, CompetitionList, NotFound } from './components';
 
-const preloadedState = window.__PRELOADED_STATE__;
-delete window.__PRELOADED_STATE__;
-const store = createStore(reducers, preloadedState, applyMiddleware(logger));
+import './App.css';
+
+const store = createStore(
+  reducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 export default class App extends Component {
   render() {
     return (
-      <Fragment>
+      <>
         <Provider store={store}>
           <BrowserRouter>
             <Switch>
@@ -24,14 +25,17 @@ export default class App extends Component {
               <Route
                 exact
                 path="/react/dist"
-                component={withLogined(DownContainer)}
+                component={withLogined(RankingList)}
               />
-              <Route exact path="/test" component={UpContainer} />
-              <Route /> {/* 404 error rendering */}
+              <Route
+                path="/competition"
+                component={withLogined(CompetitionList)}
+              />
+              <Route component={NotFound} />
             </Switch>
           </BrowserRouter>
         </Provider>
-      </Fragment>
+      </>
     );
   }
 }
