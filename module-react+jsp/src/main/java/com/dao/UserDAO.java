@@ -39,20 +39,26 @@ public class UserDAO {
         ResultSet rs = null;
 
         try {
+            System.out.println("isUser con연결 전");
             con = ds.getConnection();
+            System.out.println("isUser con연결 완료");
 
             String sql = "select * from user where kakao_id = ?;";
 
             pstmt = con.prepareStatement(sql);
+            System.out.println("isUser pstmt 할당 완료");
+
             pstmt.setInt(1, user.getKakao_id());
             rs = pstmt.executeQuery();
+
+            System.out.println("isUser pstmt 실행 완료");
 
             if (rs.next())
                 return true;
             else
                 return false;
         } catch (Exception ex) {
-            throw new Exception(ex);
+            throw new Exception("isUser 에러: ", ex);
         } finally {
             try {
                 if (rs != null)
