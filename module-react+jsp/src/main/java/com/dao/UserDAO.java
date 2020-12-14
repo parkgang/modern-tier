@@ -49,8 +49,9 @@ public class UserDAO {
             System.out.println("isUser pstmt 할당 완료");
 
             pstmt.setInt(1, user.getKakao_id());
-            rs = pstmt.executeQuery();
+            System.out.println("isUser pstmt 파라미터 넣기 완료");
 
+            rs = pstmt.executeQuery();
             System.out.println("isUser pstmt 실행 완료");
 
             if (rs.next())
