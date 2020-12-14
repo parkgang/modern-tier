@@ -29,9 +29,9 @@ public class User {
             object.put("kakao_id", kakao_id);
             return Response.status(Response.Status.OK).entity(object.toString()).build();
         } catch (NullPointerException ex) {
-            System.out.println("알려진 예외: 로그인 되어있지 않은 사용자");
+            System.out.println("알려진 예외: 세션 값이 없습니다. (로그인 되어있지 않은 사용자 접속)");
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("/v1/user/login 에러: " + ex);
         }
         return null;
     }
@@ -45,7 +45,7 @@ public class User {
             URI uri = new URI("/react/dist/");
             return Response.seeOther(uri).build();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("/v1/user/logout 에러: " + ex);
         }
         return null;
     }
@@ -71,7 +71,7 @@ public class User {
             conn.setRequestProperty("Authorization", "Bearer " + access_token);
 
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+            // System.out.println("responseCode : " + responseCode);
             if (responseCode != 200) {
                 System.out.println("에러입니다. 로그를 확인해주세요.");
             }
@@ -80,7 +80,7 @@ public class User {
             URI uri = new URI("/react/dist/");
             return Response.seeOther(uri).build();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("/v1/user/unlink 에러: " + ex);
         }
         return null;
     }
