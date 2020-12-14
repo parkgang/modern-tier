@@ -8,8 +8,10 @@
             username="839712b5d0ad994fe4372b0e6c211d2a"
             password="0c6041b3175e8f6f450e4a94970e450e"
             driverClassName="com.mysql.cj.jdbc.Driver"
-            url="jdbc:mysql://52.231.50.84:3306/modern_tier?serverTimezone=UTC&amp;autoReconnection=true"
+            url="jdbc:mysql://52.231.50.84:3306/modern_tier?serverTimezone=UTC&amp;autoReconnect=true"
             maxActive="20"
             maxIdle="10"
+            validationQuery="SELECT 1"
+            testOnBorrow="true"
     />
 </Context>
