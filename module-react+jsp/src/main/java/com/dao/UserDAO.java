@@ -78,37 +78,51 @@ public class UserDAO {
         int result;
         try {
 
+            System.out.println("con연결 전");
             try {
                 con = ds.getConnection();
             } catch (Exception ex) {
                 throw new Exception("DBCP 커넥션 반환 중 에러: ", ex);
             }
+            System.out.println("con연결 완료");
 
             // 사용자 존재시 정보 업데이트
             if (isUser(user)) {
+                System.out.println("사용자 존재시 정보 업데이트 살행");
+
                 sql = "update user set kakao_nickname=?, kakao_email=?, kakao_access_token=?, kakao_refresh_token=? where kakao_id = ?";
 
                 pstmt = con.prepareStatement(sql);
+                System.out.println("pstmt 할당");
+
                 pstmt.setString(1, user.getKakao_nickname());
                 pstmt.setString(2, user.getKakao_email());
                 pstmt.setString(3, user.getKakao_access_token());
                 pstmt.setString(4, user.getKakao_refresh_token());
                 pstmt.setInt(5, user.getKakao_id());
 
+                System.out.println("pstmt 실행 전");
                 result = pstmt.executeUpdate();
+                System.out.println("pstmt 실행 완료");
             }
             // 존재하지 않으면 새로 생성
             else {
+                System.out.println("존재하지 않으면 새로 생성");
+
                 sql = "insert into user values (null, ?, ?, ?, ?, ?, null, null, null)";
 
                 pstmt = con.prepareStatement(sql);
+                System.out.println("pstmt 할당");
+
                 pstmt.setInt(1, user.getKakao_id());
                 pstmt.setString(2, user.getKakao_nickname());
                 pstmt.setString(3, user.getKakao_email());
                 pstmt.setString(4, user.getKakao_access_token());
                 pstmt.setString(5, user.getKakao_refresh_token());
 
+                System.out.println("pstmt 실행 전");
                 result = pstmt.executeUpdate();
+                System.out.println("pstmt 실행 완료");
             }
         } catch (SQLIntegrityConstraintViolationException ex) {
             throw new SQLIntegrityConstraintViolationException("중복되는 아이디가 존재합니다: ", ex);
