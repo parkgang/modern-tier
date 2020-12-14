@@ -56,7 +56,7 @@ public class Kakao {
 
             // 결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode: " + responseCode);
+            // System.out.println("responseCode: " + responseCode);
             if (responseCode != 200) {
                 System.out.println("에러입니다. 로그를 확인해주세요.");
             }
@@ -69,14 +69,14 @@ public class Kakao {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println("response body: " + result);
+            // System.out.println("response body: " + result);
 
             // Response JSON 파싱
             JSONObject jObject = new JSONObject(result);
             access_token = jObject.getString("access_token");
             refresh_token = jObject.getString("refresh_token");
-            System.out.println("access_token: " + access_token);
-            System.out.println("refresh_token: " + refresh_token);
+            // System.out.println("access_token: " + access_token);
+            // System.out.println("refresh_token: " + refresh_token);
 
             userBean.setKakao_access_token(access_token);
             userBean.setKakao_refresh_token(refresh_token);
@@ -105,7 +105,7 @@ public class Kakao {
             conn.setRequestProperty("Authorization", "Bearer " + access_token);
 
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+            // System.out.println("responseCode : " + responseCode);
             if (responseCode != 200) {
                 System.out.println("에러입니다. 로그를 확인해주세요.");
             }
@@ -117,7 +117,7 @@ public class Kakao {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println("response body : " + result);
+            // System.out.println("response body : " + result);
 
             // Response JSON 파싱
             JSONObject jObject = new JSONObject(result);
@@ -129,9 +129,9 @@ public class Kakao {
             String nickname = propertiesObject.getString("nickname");
             String email = kakao_accountObject.getString("email");
 
-            System.out.println("id: " + id);
-            System.out.println("nickname: " + nickname);
-            System.out.println("email: " + email);
+            // System.out.println("id: " + id);
+            // System.out.println("nickname: " + nickname);
+            // System.out.println("email: " + email);
 
             userBean.setKakao_id(id);
             userBean.setKakao_nickname(nickname);
@@ -146,18 +146,18 @@ public class Kakao {
         try {
             userBean = new UserBean();
             // 인가 코드 확인
-            System.out.println("code: " + code);
+            // System.out.println("code: " + code);
 
             String access_token = getAccessToken(code);
 
             getUserInfo(access_token);
 
-            System.out.println("UserBean 출력");
+            // System.out.println("UserBean 출력");
             System.out.println(userBean.getKakao_id());
             System.out.println(userBean.getKakao_nickname());
             System.out.println(userBean.getKakao_email());
             System.out.println(userBean.getKakao_access_token());
-            System.out.println(userBean.getKakao_refresh_token());
+            // System.out.println(userBean.getKakao_refresh_token());
 
             UserDAO userDAO = UserDAO.getInstance();
             userDAO.userInsert(userBean);
