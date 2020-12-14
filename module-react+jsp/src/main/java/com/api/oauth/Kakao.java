@@ -86,7 +86,7 @@ public class Kakao {
 
             return access_token;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("getAccessToken 예러: " + ex);
         }
         return null;
     }
@@ -137,7 +137,7 @@ public class Kakao {
             userBean.setKakao_nickname(nickname);
             userBean.setKakao_email(email);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("getUserInfo 예러: " + ex);
         }
     }
 
