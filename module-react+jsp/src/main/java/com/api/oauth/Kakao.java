@@ -170,7 +170,7 @@ public class Kakao {
             URI uri = new URI("/react/dist/");
             return Response.seeOther(uri).build();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("login 예러: " + ex);
         }
         return null;
     }
