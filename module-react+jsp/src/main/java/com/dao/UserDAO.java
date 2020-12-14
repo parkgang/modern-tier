@@ -78,7 +78,11 @@ public class UserDAO {
         int result;
         try {
 
-            con = ds.getConnection();
+            try {
+                con = ds.getConnection();
+            } catch (Exception ex) {
+                throw new Exception("DBCP 커넥션 반환 중 에러: ", ex);
+            }
 
             // 사용자 존재시 정보 업데이트
             if (isUser(user)) {
