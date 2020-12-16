@@ -153,12 +153,11 @@ public class Kakao {
             getUserInfo(access_token);
 
             // System.out.println("UserBean 출력");
-            System.out.println(userBean.getKakao_id());
-            System.out.println(userBean.getKakao_nickname());
-            System.out.println(userBean.getKakao_nickname());
-            System.out.println(userBean.getKakao_email());
-            System.out.println(userBean.getKakao_access_token());
-            // System.out.println(userBean.getKakao_refresh_token());
+            System.out.println("Kakao_id: " + userBean.getKakao_id());
+            System.out.println("Kakao_nickname: " + userBean.getKakao_nickname());
+            System.out.println("Kakao_email: " + userBean.getKakao_email());
+            System.out.println("Kakao_access_token: " + userBean.getKakao_access_token());
+            System.out.println("Kakao_refresh_token: " + userBean.getKakao_refresh_token());
 
             UserDAO userDAO = UserDAO.getInstance();
             userDAO.userInsert(userBean);
