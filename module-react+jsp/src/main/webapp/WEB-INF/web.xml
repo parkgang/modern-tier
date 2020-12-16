@@ -3,4 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <!-- [Tomcat에서 jsessionid가 URL에 붙어서 React-Router기 잘못된 요청인 NotFound으로 가는 현상 비활성화](https://offbyone.tistory.com/339) -->
+    <session-config>
+        <session-timeout>600</session-timeout>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
 </web-app>
