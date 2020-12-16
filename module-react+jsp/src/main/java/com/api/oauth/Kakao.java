@@ -154,6 +154,7 @@ public class Kakao {
 
             // System.out.println("UserBean 출력");
             System.out.println(userBean.getKakao_id());
+            System.out.println("id 출력 후 닉네임 출력");
             System.out.println(userBean.getKakao_nickname());
             System.out.println(userBean.getKakao_email());
             System.out.println(userBean.getKakao_access_token());
