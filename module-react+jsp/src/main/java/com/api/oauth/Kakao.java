@@ -20,12 +20,11 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.util.HashMap;
 
 @Path("oauth/kakao")
 public class Kakao {
 
-    private final String OAuth_Redirect_URI = "http://" + Service.USE_IP + "/api/oauth/kakao";
+    private final String OAuth_Redirect_URI = Service.USE_DOMAIN + "/api/oauth/kakao";
 
     private UserBean userBean;
 

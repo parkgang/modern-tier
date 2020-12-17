@@ -2,7 +2,7 @@
 <%@ page import="com.constant.Service" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    final String KAKAO_OAUTH_URI = "https://kauth.kakao.com/oauth/authorize?client_id=" + KakaoApp.REST_API_KEY + "&redirect_uri=" + "http://" + Service.USE_IP + "/api/oauth/kakao&response_type=code&scope=profile,account_email,friends,talk_message";
+    final String KAKAO_OAUTH_URI = "https://kauth.kakao.com/oauth/authorize?client_id=" + KakaoApp.REST_API_KEY + "&redirect_uri=" + Service.USE_DOMAIN + "/api/oauth/kakao&response_type=code&scope=profile,account_email,friends,talk_message";
 %>
 <!DOCTYPE html>
 <html>
