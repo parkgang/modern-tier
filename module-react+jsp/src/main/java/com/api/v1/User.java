@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -57,7 +60,6 @@ public class User {
         final String URI = "https://kapi.kakao.com/v1/user/unlink";
 
         try {
-
             int kakao_id = (int) req.getSession().getAttribute("kakao_id");
 
             UserDAO userDAO = UserDAO.getInstance();
@@ -81,6 +83,64 @@ public class User {
             return Response.seeOther(uri).build();
         } catch (Exception ex) {
             System.out.println("/v1/user/unlink 에러: " + ex);
+        }
+        return null;
+    }
+
+    @GET
+    @Path("/profile")
+    @Produces(MediaType.APPLICATION_JSON)
+    // 프로필 조회
+    public Response profile(@Context HttpServletRequest req, @QueryParam("kakaoId") String kakaoId) {
+        final String Kakao_UserInfo_Req_URI = "https://kapi.kakao.com/v2/user/me";
+
+        try {
+            System.out.println("kakaoId: " + kakaoId);
+
+            // 토큰값 가져오기
+            UserDAO userDAO = UserDAO.getInstance();
+            String accessToken = userDAO.userKakaoAccessToken(Integer.parseInt(kakaoId));
+            System.out.println("accessToken: " + accessToken);
+
+            // 토큰값으로 프로필 조회
+            URL url = new URL(Kakao_UserInfo_Req_URI);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode != 200) {
+                System.out.println("에러입니다. 로그를 확인해주세요.");
+            }
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+
+            // Response JSON 파싱
+            JSONObject jObject = new JSONObject(result);
+
+            JSONObject profileObject = jObject.getJSONObject("kakao_account").getJSONObject("profile");
+
+            String nickname = profileObject.getString("nickname");
+            String profile_image_url = profileObject.getString("profile_image_url");
+
+            System.out.println("nickname: " + nickname);
+            System.out.println("profile_image_url: " + profile_image_url);
+
+            // json 조립후 responce
+            JSONObject resJSON = new JSONObject();
+            resJSON.put("nickName", nickname);
+            resJSON.put("profileImage", profile_image_url);
+
+            return Response.status(Response.Status.OK).entity(resJSON.toString()).build();
+        } catch (Exception ex) {
+            System.out.println("/v1/user/profile 에러: " + ex);
         }
         return null;
     }

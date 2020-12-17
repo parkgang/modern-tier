@@ -173,4 +173,38 @@ public class UserDAO {
             }
         }
     }
+
+    // kakao_access_token 조회
+    public String userKakaoAccessToken(int kakao_id) throws Exception {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = ds.getConnection();
+
+            String sql = "select kakao_access_token from user where kakao_id = ?;";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, kakao_id);
+            rs = pstmt.executeQuery();
+
+            if (rs.next())
+                return rs.getString("kakao_access_token");
+        } catch (Exception ex) {
+            throw new Exception("userKakaoAccessToken 에러: ", ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
+        return null;
+    }
 }
