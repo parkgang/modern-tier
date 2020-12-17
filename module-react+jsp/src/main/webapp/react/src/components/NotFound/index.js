@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { PATH_ROOT } from '../../constants';
 
 import './index.css';
 
@@ -12,7 +15,9 @@ const NotFound = () => {
         <span>잘못된 요청입니다.</span>
       </div>
       <div>
-        <span>홈 화면으로 돌아가기. (버튼으로 그리기 예정)</span>
+        <Link to={PATH_ROOT}>
+          <button>홈 화면으로 돌아가기</button>
+        </Link>
       </div>
     </div>
   );
