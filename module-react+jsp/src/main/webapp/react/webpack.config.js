@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: ['@babel/polyfill', './src/index.js'],
   output: {
     filename: 'bundle.[hash].js',
     // path를 지정하지 않으면 CleanWebpackPlugin에서 사용하지 않는 모든 웹팩 자산을 제거할 수 없습니다.
