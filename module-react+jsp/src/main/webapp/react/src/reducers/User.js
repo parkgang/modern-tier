@@ -2,8 +2,8 @@ import * as types from '../actions/ActionTypes';
 import { USE_DOMAIN } from '../constants';
 
 const initialState = {
+  nickName: '',
   profileImage: '',
-  nickname: '',
 };
 
 export default (state = initialState, action) => {
@@ -14,6 +14,12 @@ export default (state = initialState, action) => {
     case types.UNLINK_USER:
       location.href = USE_DOMAIN + '/api/v1/user/unlink';
       return state;
+    case types.LOGIN_USER:
+      return {
+        ...state,
+        nickName: action.payload.nickName,
+        profileImage: action.payload.profileImage,
+      };
     default:
       return state;
   }

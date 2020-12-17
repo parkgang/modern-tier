@@ -11,7 +11,5 @@ export const request = (method, url, data) => {
     method,
     url: USE_DOMAIN + url,
     data,
-  })
-    .then((res) => res.data)
-    .catch((err) => console.log(err));
+  }).catch((err) => console.log(`services/request 에러: ${err}`));
 };

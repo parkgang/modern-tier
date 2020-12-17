@@ -17,7 +17,10 @@ export default function (InputComponent) {
           if (kakaoId === undefined) {
             window.location.href = USE_DOMAIN + '/views/kakaoOAuth/';
           } else {
-            dispatch(actions.loginUser(kakaoId));
+            actions.loginUser(kakaoId).then((result) => {
+              dispatch(result);
+            });
+            // dispatch(actions.loginUser(kakaoId)); 와 동일합니다
           }
         })
         .catch((err) => {

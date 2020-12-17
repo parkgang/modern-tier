@@ -9,7 +9,7 @@ import User from './User';
 const reducers = combineReducers({
   downPage: Down,
   upPage: Up,
-  User: User,
+  user: User,
 });
 
 export default reducers;

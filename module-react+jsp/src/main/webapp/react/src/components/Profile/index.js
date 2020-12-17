@@ -1,19 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import './index.css';
 
+const userSelector = (state) => state.user;
+
 const Profile = () => {
+  const { nickName, profileImage } = useSelector(userSelector);
   return (
     <div id="profile">
       <div>
-        <img
-          width="100"
-          src="http://k.kakaocdn.net/dn/VKqEW/btqPPDh1mAM/UrV6GV7xIdlJKGifqhgUbk/img_640x640.jpg"
-          alt="kakao 프로필 사진"
-        />
+        <img width="100" src={profileImage} alt="kakao 프로필 사진" />
       </div>
       <div>
-        <span>테스트 이름</span>
+        <span>{nickName}</span>
       </div>
     </div>
   );
