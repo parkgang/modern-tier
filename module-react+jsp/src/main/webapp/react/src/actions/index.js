@@ -27,3 +27,8 @@ export const logoutUser = () => ({
 export const unlinkUser = () => ({
   type: types.UNLINK_USER,
 });
+
+export const searchUser = (nickname) => ({
+  type: types.SEARCH_USER,
+  payload: nickname,
+});

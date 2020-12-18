@@ -90,7 +90,13 @@ const Header = () => {
           <img src="/src/resources/icon/add-friend.svg" width="24px" />
         </label>
         <div id="friend-list">
-          <input type="text" placeholder="이름으로 검색" />
+          <input
+            type="text"
+            placeholder="카카오톡 이름으로 검색"
+            onChange={(e) => {
+              dispatch(actions.searchUser(e.target.value));
+            }}
+          />
           <div>{friendList}</div>
         </div>
       </div>
