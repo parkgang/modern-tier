@@ -52,7 +52,7 @@ const Header = () => {
   return (
     <div id="header">
       <a href={PATH_ROOT}>
-        <img src="/src/resources/img/service-logo.jpg" />
+        <img src="/react/src/resources/img/service-logo.jpg" />
       </a>
       <div className="burger-menu">
         <input id="burger-menu-toggle" type="checkbox" />
@@ -62,7 +62,7 @@ const Header = () => {
             popUpController('burger-menu');
           }}
         >
-          <img src="/src/resources/icon/burger-menu.svg" width="24px" />
+          <img src="/react/src/resources/icon/burger-menu.svg" width="24px" />
         </label>
         <div id="burger-menu-list">
           <ul>
@@ -87,7 +87,7 @@ const Header = () => {
             popUpController('add-friend');
           }}
         >
-          <img src="/src/resources/icon/add-friend.svg" width="24px" />
+          <img src="/react/src/resources/icon/add-friend.svg" width="24px" />
         </label>
         <div id="friend-list">
           <input
