@@ -2,8 +2,8 @@ import * as types from '../actions/ActionTypes';
 import { USE_DOMAIN } from '../constants';
 
 const initialState = {
-  nickName: '',
-  profileImage: '',
+  nickName: '로그인 되지 않은 사용자',
+  profileImage: '../../public/img/kakaoTalk-default-profile.jpg',
 };
 
 export default (state = initialState, action) => {
