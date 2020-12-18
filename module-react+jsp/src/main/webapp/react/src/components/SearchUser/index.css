@@ -1,0 +1,18 @@
+#search-user {
+  padding: 10px;
+}
+
+#search-user img {
+  border-radius: 40%;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+#search-user div {
+  float: right;
+  margin-top: 5px;
+}
+
+#search-user div > button {
+  height: 20px;
+}

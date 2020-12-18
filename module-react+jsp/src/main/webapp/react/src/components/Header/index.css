@@ -31,7 +31,6 @@
   display: none;
   background-color: white;
   width: 80px;
-  /* height: 60px; */
   border: 1px solid gray;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -41,8 +40,6 @@
   list-style: none;
   margin-top: 8px;
   margin-bottom: 8px;
-  /* height: 305px; */
-  /* overflow: scroll; */
 }
 #burger-menu-list ul button {
   display: block;
@@ -88,25 +85,10 @@
   margin-top: 8px;
   margin-bottom: 8px;
 }
-#friend-list ul {
+#friend-list > div {
   list-style: none;
-  height: 305px;
+  height: 300px;
   overflow: scroll;
-}
-#friend-list li {
-  padding: 10px;
-}
-#friend-list li img {
-  border-radius: 40%;
-  vertical-align: middle;
-  margin-right: 10px;
-}
-#friend-list li div {
-  float: right;
-  margin-top: 5px;
-}
-#friend-list li div > button {
-  height: 20px;
 }
 
 /* 팝업 위치 정의 */

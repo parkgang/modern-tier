@@ -9,6 +9,7 @@ import Ranking from './Ranking';
 import CompetitionList from './CompetitionList';
 import Competition from './Competition';
 import NotFound from './NotFound';
+import SearchUser from './SearchUser';
 
 export {
   DownCounter,
@@ -21,4 +22,5 @@ export {
   CompetitionList,
   Competition,
   NotFound,
+  SearchUser,
 };

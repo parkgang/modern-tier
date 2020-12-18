@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import * as actions from '../../actions';
 import { PATH_ROOT } from '../../constants';
+import SearchUser from '../SearchUser';
 
 import './index.css';
 
@@ -22,6 +23,31 @@ const Header = () => {
       toggle.click();
     }
   };
+  // 임시 변수
+  const friendData = [
+    {
+      kakaoId: 123123123,
+      nickname: '박경은',
+      profileImage: '/src/resources/img/kakaoTalk-default-profile.jpg',
+      isFriend: false,
+    },
+    {
+      kakaoId: 20001123,
+      nickname: '친구1',
+      profileImage: '/src/resources/img/kakaoTalk-default-profile.jpg',
+      isFriend: true,
+    },
+  ];
+  // 렌더링 변수
+  const friendList = friendData.map((x, index) => (
+    <SearchUser
+      key={index}
+      kakaoId={x.kakaoId}
+      nickname={x.nickname}
+      profileImage={x.profileImage}
+      isFriend={x.isFriend}
+    />
+  ));
 
   return (
     <div id="header">
@@ -65,19 +91,7 @@ const Header = () => {
         </label>
         <div id="friend-list">
           <input type="text" placeholder="이름으로 검색" />
-          <ul>
-            <li>
-              <img
-                src="/src/resources/img/kakaoTalk-default-profile.jpg"
-                width="30px"
-                alt=""
-              />
-              <span>박경은</span>
-              <div>
-                <button>친구 추가</button>
-              </div>
-            </li>
-          </ul>
+          <div>{friendList}</div>
         </div>
       </div>
     </div>
