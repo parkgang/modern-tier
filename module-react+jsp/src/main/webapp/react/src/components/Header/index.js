@@ -28,13 +28,13 @@ const Header = () => {
     {
       kakaoId: 123123123,
       nickname: '박경은',
-      profileImage: '/src/resources/img/kakaoTalk-default-profile.jpg',
+      profileImage: '/react/src/resources/img/kakaoTalk-default-profile.jpg',
       isFriend: false,
     },
     {
       kakaoId: 20001123,
       nickname: '친구1',
-      profileImage: '/src/resources/img/kakaoTalk-default-profile.jpg',
+      profileImage: '/react/src/resources/img/kakaoTalk-default-profile.jpg',
       isFriend: true,
     },
   ];
