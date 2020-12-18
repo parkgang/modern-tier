@@ -73,7 +73,6 @@ public class User {
             conn.setRequestProperty("Authorization", "Bearer " + access_token);
 
             int responseCode = conn.getResponseCode();
-            // System.out.println("responseCode : " + responseCode);
             if (responseCode != 200) {
                 System.out.println("에러입니다. 로그를 확인해주세요.");
             }
@@ -95,12 +94,10 @@ public class User {
         final String Kakao_UserInfo_Req_URI = "https://kapi.kakao.com/v2/user/me";
 
         try {
-            System.out.println("kakaoId: " + kakaoId);
-
             // 토큰값 가져오기
             UserDAO userDAO = UserDAO.getInstance();
+
             String accessToken = userDAO.userKakaoAccessToken(Integer.parseInt(kakaoId));
-            System.out.println("accessToken: " + accessToken);
 
             // 토큰값으로 프로필 조회
             URL url = new URL(Kakao_UserInfo_Req_URI);
@@ -130,11 +127,9 @@ public class User {
             String nickname = profileObject.getString("nickname");
             String profile_image_url = profileObject.getString("profile_image_url");
 
-            System.out.println("nickname: " + nickname);
-            System.out.println("profile_image_url: " + profile_image_url);
-
             // json 조립후 responce
             JSONObject resJSON = new JSONObject();
+
             resJSON.put("nickName", nickname);
             resJSON.put("profileImage", profile_image_url);
 

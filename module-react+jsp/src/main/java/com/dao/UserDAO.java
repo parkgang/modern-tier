@@ -83,28 +83,30 @@ public class UserDAO {
 
             // 사용자 존재시 정보 업데이트
             if (isUser(user)) {
-                sql = "update user set kakao_nickname=?, kakao_email=?, kakao_access_token=?, kakao_refresh_token=? where kakao_id = ?";
+                sql = "update user set kakao_nickname=?, kakao_email=?, kakao_profile_image_url=? ,kakao_access_token=?, kakao_refresh_token=? where kakao_id = ?";
 
                 pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, user.getKakao_nickname());
                 pstmt.setString(2, user.getKakao_email());
-                pstmt.setString(3, user.getKakao_access_token());
-                pstmt.setString(4, user.getKakao_refresh_token());
-                pstmt.setInt(5, user.getKakao_id());
+                pstmt.setString(3, user.getKakao_profile_image_url());
+                pstmt.setString(4, user.getKakao_access_token());
+                pstmt.setString(5, user.getKakao_refresh_token());
+                pstmt.setInt(6, user.getKakao_id());
 
                 result = pstmt.executeUpdate();
             }
             // 존재하지 않으면 새로 생성
             else {
-                sql = "insert into user values (null, ?, ?, ?, ?, ?, null, null, null)";
+                sql = "insert into user (kakao_id, kakao_nickname, kakao_email, kakao_profile_image_url, kakao_access_token, kakao_refresh_token) values (?, ?, ?, ?, ?, ?)";
 
                 pstmt = con.prepareStatement(sql);
 
                 pstmt.setInt(1, user.getKakao_id());
                 pstmt.setString(2, user.getKakao_nickname());
                 pstmt.setString(3, user.getKakao_email());
-                pstmt.setString(4, user.getKakao_access_token());
-                pstmt.setString(5, user.getKakao_refresh_token());
+                pstmt.setString(4, user.getKakao_profile_image_url());
+                pstmt.setString(5, user.getKakao_access_token());
+                pstmt.setString(6, user.getKakao_refresh_token());
 
                 result = pstmt.executeUpdate();
             }

@@ -55,7 +55,6 @@ public class Kakao {
 
             // 결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
-            // System.out.println("responseCode: " + responseCode);
             if (responseCode != 200) {
                 System.out.println("에러입니다. 로그를 확인해주세요.");
             }
@@ -72,10 +71,9 @@ public class Kakao {
 
             // Response JSON 파싱
             JSONObject jObject = new JSONObject(result);
+
             access_token = jObject.getString("access_token");
             refresh_token = jObject.getString("refresh_token");
-            // System.out.println("access_token: " + access_token);
-            // System.out.println("refresh_token: " + refresh_token);
 
             userBean.setKakao_access_token(access_token);
             userBean.setKakao_refresh_token(refresh_token);
@@ -104,7 +102,6 @@ public class Kakao {
             conn.setRequestProperty("Authorization", "Bearer " + access_token);
 
             int responseCode = conn.getResponseCode();
-            // System.out.println("responseCode : " + responseCode);
             if (responseCode != 200) {
                 System.out.println("에러입니다. 로그를 확인해주세요.");
             }
@@ -122,18 +119,16 @@ public class Kakao {
             JSONObject jObject = new JSONObject(result);
             int id = jObject.getInt("id");
 
-            JSONObject propertiesObject = jObject.getJSONObject("properties");
             JSONObject kakao_accountObject = jObject.getJSONObject("kakao_account");
+            JSONObject profileObject = kakao_accountObject.getJSONObject("profile");
 
-            String nickname = propertiesObject.getString("nickname");
+            String nickname = profileObject.getString("nickname");
+            String profile_image_url = profileObject.getString("profile_image_url");
             String email = kakao_accountObject.getString("email");
-
-            // System.out.println("id: " + id);
-            // System.out.println("nickname: " + nickname);
-            // System.out.println("email: " + email);
 
             userBean.setKakao_id(id);
             userBean.setKakao_nickname(nickname);
+            userBean.setKakao_profile_image_url(profile_image_url);
             userBean.setKakao_email(email);
         } catch (Exception ex) {
             System.out.println("getUserInfo 에러: " + ex);
@@ -144,6 +139,7 @@ public class Kakao {
     public Response login(@QueryParam("code") String code, @Context HttpServletRequest req) {
         try {
             userBean = new UserBean();
+
             // 인가 코드 확인
             // System.out.println("code: " + code);
 
@@ -151,12 +147,14 @@ public class Kakao {
 
             getUserInfo(access_token);
 
-            // System.out.println("UserBean 출력");
+            System.out.println("User Login");
             System.out.println("Kakao_id: " + userBean.getKakao_id());
             System.out.println("Kakao_nickname: " + userBean.getKakao_nickname());
             System.out.println("Kakao_email: " + userBean.getKakao_email());
+            System.out.println("kakao_profile_image_url: " + userBean.getKakao_profile_image_url());
             System.out.println("Kakao_access_token: " + userBean.getKakao_access_token());
             System.out.println("Kakao_refresh_token: " + userBean.getKakao_refresh_token());
+            System.out.println("");
 
             UserDAO userDAO = UserDAO.getInstance();
             userDAO.userInsert(userBean);

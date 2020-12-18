@@ -8,15 +8,16 @@ show tables;
 
 CREATE TABLE user
 (
-    id                  INT(11) NOT NULL AUTO_INCREMENT,
-    kakao_id            INT     NOT NULL UNIQUE,
-    kakao_nickname      VARCHAR(20),
-    kakao_email         VARCHAR(20),
-    kakao_access_token  VARCHAR(60),
-    kakao_refresh_token VARCHAR(60),
-    riot_id             VARCHAR(60) UNIQUE,
-    riot_name           VARCHAR(20),
-    riot_summonerLevel  INT,
+    id                      INT(11) NOT NULL AUTO_INCREMENT,
+    kakao_id                INT     NOT NULL UNIQUE,
+    kakao_nickname          VARCHAR(20),
+    kakao_email             VARCHAR(20),
+    kakao_profile_image_url VARCHAR(100),
+    kakao_access_token      VARCHAR(60),
+    kakao_refresh_token     VARCHAR(60),
+    riot_id                 VARCHAR(60) UNIQUE,
+    riot_name               VARCHAR(20),
+    riot_summonerLevel      INT,
     PRIMARY KEY (id, kakao_id)
 );
 
@@ -25,8 +26,9 @@ drop table user;
 select *
 from user;
 
-insert into user
-values (null, 2, null, null, null, null, null, null, 1);
+insert into user (kakao_id, kakao_nickname, kakao_email, kakao_profile_image_url, kakao_access_token,
+                  kakao_refresh_token)
+values (123, '닉네임', '이메일', '프로필 이미지', '엑세스 토큰', '리프레시 토큰');
 
 delete
 from user

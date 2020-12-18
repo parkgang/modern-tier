@@ -5,6 +5,7 @@ public class UserBean {
     private int kakao_id;
     private String kakao_nickname;
     private String kakao_email;
+    private String kakao_profile_image_url;
     private String kakao_access_token;
     private String kakao_refresh_token;
     private String riot_id;
@@ -16,6 +17,7 @@ public class UserBean {
         this.kakao_id = 0;
         this.kakao_nickname = null;
         this.kakao_email = null;
+        this.kakao_profile_image_url = null;
         this.kakao_access_token = null;
         this.kakao_refresh_token = null;
         this.riot_id = null;
@@ -53,6 +55,14 @@ public class UserBean {
 
     public void setKakao_email(String kakao_email) {
         this.kakao_email = kakao_email;
+    }
+
+    public String getKakao_profile_image_url() {
+        return kakao_profile_image_url;
+    }
+
+    public void setKakao_profile_image_url(String kakao_profile_image_url) {
+        this.kakao_profile_image_url = kakao_profile_image_url;
     }
 
     public String getKakao_access_token() {
