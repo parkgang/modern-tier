@@ -28,6 +28,10 @@ export const unlinkUser = () => ({
   type: types.UNLINK_USER,
 });
 
+export const searchingUser = () => ({
+  type: types.SEARCHING_USER,
+});
+
 export const searchUser = async (nickname) => {
   const userList = await request(
     'get',

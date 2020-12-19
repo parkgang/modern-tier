@@ -1,6 +1,7 @@
 import * as types from '../actions/ActionTypes';
 
 const initialState = {
+  isLoading: false,
   keyword: '',
   list: [
     {
@@ -14,9 +15,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case types.SEARCHING_USER:
+      return { ...state, isLoading: true };
     case types.SEARCH_USER:
       return {
         ...state,
+        isLoading: false,
         keyword: action.nickname,
         list: action.payload.map((x) => ({
           kakaoId: x.kakaoId,
