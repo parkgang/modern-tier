@@ -10,7 +10,7 @@ const Profile = () => {
   return (
     <div id="profile">
       <div>
-        <img width="100" src={profileImage} alt="kakao 프로필 사진" />
+        <img src={profileImage} alt="kakao 프로필 사진" />
       </div>
       <div>
         <span>{nickName}</span>

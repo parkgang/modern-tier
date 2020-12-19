@@ -6,6 +6,8 @@
   border-radius: 40%;
   vertical-align: middle;
   margin-right: 10px;
+  width: 30px;
+  height: 30px;
 }
 
 #search-user div {

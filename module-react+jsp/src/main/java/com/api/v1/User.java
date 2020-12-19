@@ -124,11 +124,13 @@ public class User {
 
             // Response JSON 파싱
             JSONObject jObject = new JSONObject(result);
-
             JSONObject profileObject = jObject.getJSONObject("kakao_account").getJSONObject("profile");
 
             String nickname = profileObject.getString("nickname");
-            String profile_image_url = profileObject.getString("profile_image_url");
+
+            String profile_image_url = null;
+            if (profileObject.isNull("profile_image_url") == false)
+                profile_image_url = profileObject.getString("profile_image_url");
 
             // json 조립후 responce
             JSONObject resJSON = new JSONObject();

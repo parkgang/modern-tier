@@ -6,7 +6,7 @@ import './index.css';
 const SearchUser = ({ kakaoId, nickname, profileImage, isFriend }) => {
   return (
     <div id="search-user">
-      <img src={profileImage} width="30px" alt="" />
+      <img src={profileImage} alt="친구 프로필 사진이 없습니다" />
       <span>{nickname}</span>
       <div>{isFriend === false ? <button>친구 추가</button> : null}</div>
     </div>
