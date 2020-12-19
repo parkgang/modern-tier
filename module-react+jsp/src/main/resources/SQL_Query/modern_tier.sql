@@ -37,7 +37,8 @@ where id = 1;
 # 사용자 검색
 select *
 from user
-where kakao_id = 1536694714;
+where kakao_id = 007;
+-- where kakao_nickname like '%경%';
 
 # 사용자 수정
 update user
