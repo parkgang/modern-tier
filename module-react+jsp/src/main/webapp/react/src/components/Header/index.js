@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../../actions';
 import { PATH_ROOT } from '../../constants';
@@ -7,8 +7,18 @@ import SearchUser from '../SearchUser';
 
 import './index.css';
 
+const friendSelector = (state) => state.friend;
+
 const Header = () => {
+  useEffect(() => {
+    actions.searchUser('').then((res) => {
+      dispatch(res);
+    });
+  }, []);
+
   const dispatch = useDispatch();
+
+  const { list } = useSelector(friendSelector);
 
   // 레이어 팝업 설계의 문제로 생성된 함수 입니다. 다른 팝업이 활성화 되어있으면 종료합니다.
   const popUpController = (mode) => {
@@ -23,23 +33,9 @@ const Header = () => {
       toggle.click();
     }
   };
-  // 임시 변수
-  const friendData = [
-    {
-      kakaoId: 123123123,
-      nickname: '박경은',
-      profileImage: '/react/src/resources/img/kakaoTalk-default-profile.jpg',
-      isFriend: false,
-    },
-    {
-      kakaoId: 20001123,
-      nickname: '친구1',
-      profileImage: '/react/src/resources/img/kakaoTalk-default-profile.jpg',
-      isFriend: true,
-    },
-  ];
+
   // 렌더링 변수
-  const friendList = friendData.map((x, index) => (
+  const friendList = list.map((x, index) => (
     <SearchUser
       key={index}
       kakaoId={x.kakaoId}
@@ -94,7 +90,9 @@ const Header = () => {
             type="text"
             placeholder="카카오톡 이름으로 검색"
             onChange={(e) => {
-              dispatch(actions.searchUser(e.target.value));
+              actions.searchUser(e.target.value).then((res) => {
+                dispatch(res);
+              });
             }}
           />
           <div>{friendList}</div>
