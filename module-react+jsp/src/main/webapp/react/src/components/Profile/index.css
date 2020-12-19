@@ -1,11 +1,20 @@
 #profile {
-  height: 150px;
-  margin: 10px 10px 10px 10px;
+  height: 220px;
   padding: 10px 10px 10px 10px;
-  border: 2px solid black;
   text-align: center;
 }
 
 #profile img {
-  border-radius: 30%;
+  border-radius: 40%;
+  width: 150px;
+  height: 150px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(82, 82, 83);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+#profile span {
+  font-size: 22px;
+  font-weight: bold;
 }
