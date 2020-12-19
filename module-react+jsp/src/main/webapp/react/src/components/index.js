@@ -1,6 +1,3 @@
-import DownCounter from './DownCounter';
-import UpCounter from './UpCounter';
-
 import Header from './Header';
 import Profile from './Profile';
 import TabNavigator from './TabNavigator';
@@ -13,8 +10,6 @@ import SearchUser from './SearchUser';
 import SearchUserSkeleton from './SearchUserSkeleton';
 
 export {
-  DownCounter,
-  UpCounter,
   Header,
   Profile,
   TabNavigator,
