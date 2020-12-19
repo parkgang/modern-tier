@@ -3,7 +3,7 @@ import { USE_DOMAIN } from '../constants';
 
 const initialState = {
   nickName: '로그인 되지 않은 사용자',
-  profileImage: '/react/src/resources/img/kakaoTalk-default-profile.jpg',
+  profileImage: '',
 };
 
 export default (state = initialState, action) => {
@@ -18,7 +18,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         nickName: action.payload.nickName,
-        profileImage: action.payload.profileImage,
+        profileImage:
+          action.payload.profileImage === undefined
+            ? '/react/src/resources/img/kakaoTalk-default-profile.jpg'
+            : action.payload.profileImage,
       };
     default:
       return state;
