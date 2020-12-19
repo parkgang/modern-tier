@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
@@ -208,5 +210,49 @@ public class UserDAO {
             }
         }
         return null;
+    }
+
+    // 사용자 조회
+    public List userSearch(String kakaoNickname) throws Exception {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        List list = new ArrayList();
+
+        try {
+            con = ds.getConnection();
+
+            String sql = "select * from user where kakao_nickname like ?";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, "%" + kakaoNickname + "%");
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                UserBean userBean = new UserBean();
+
+                userBean.setKakao_id(rs.getInt("kakao_id"));
+                userBean.setKakao_nickname(rs.getString("kakao_nickname"));
+                userBean.setKakao_profile_image_url(rs.getString("kakao_profile_image_url"));
+
+                list.add(userBean);
+            }
+
+            return list;
+        } catch (Exception ex) {
+            throw new Exception("userSearch 에러: ", ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
     }
 }

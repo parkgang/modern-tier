@@ -1,6 +1,8 @@
 package com.api.v1;
 
 import com.dao.UserDAO;
+import com.dto.UserBean;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.List;
 
 @Path("/v1/user")
 public class User {
@@ -136,6 +139,38 @@ public class User {
             return Response.status(Response.Status.OK).entity(resJSON.toString()).build();
         } catch (Exception ex) {
             System.out.println("/v1/user/profile 에러: " + ex);
+        }
+        return null;
+    }
+
+    @GET
+    @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    // 사용자 검색
+    public Response search(@Context HttpServletRequest req, @QueryParam("kakaoNickname") String kakaoNickname) {
+        try {
+            UserDAO userDAO = UserDAO.getInstance();
+            List userList = userDAO.userSearch(kakaoNickname);
+
+            JSONArray resJSON = new JSONArray();
+
+            for (int i = 0; i < userList.size(); i++) {
+                JSONObject jsonObject = new JSONObject();
+
+                UserBean user = (UserBean) userList.get(i);
+
+                jsonObject.put("kakaoId", user.getKakao_id());
+                jsonObject.put("nickname", user.getKakao_nickname());
+                jsonObject.put("profileImage", user.getKakao_profile_image_url());
+                // TODO: 로그인한 user와 친구관계를 확인하는 로직이 추가되어야합니다.
+                jsonObject.put("isFriend", false);
+
+                resJSON.put(jsonObject);
+            }
+
+            return Response.status(Response.Status.OK).entity(resJSON.toString()).build();
+        } catch (Exception ex) {
+            System.out.println("/v1/user/search 에러: " + ex);
         }
         return null;
     }
