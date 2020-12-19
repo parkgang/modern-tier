@@ -28,7 +28,14 @@ export const unlinkUser = () => ({
   type: types.UNLINK_USER,
 });
 
-export const searchUser = (nickname) => ({
-  type: types.SEARCH_USER,
-  payload: nickname,
-});
+export const searchUser = async (nickname) => {
+  const userList = await request(
+    'get',
+    `/api/v1/user/search?kakaoNickname=${nickname}`
+  );
+  return {
+    type: types.SEARCH_USER,
+    nickname,
+    payload: userList.data,
+  };
+};
