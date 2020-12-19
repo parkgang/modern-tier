@@ -117,14 +117,20 @@ public class Kakao {
 
             // Response JSON 파싱
             JSONObject jObject = new JSONObject(result);
-            int id = jObject.getInt("id");
-
             JSONObject kakao_accountObject = jObject.getJSONObject("kakao_account");
             JSONObject profileObject = kakao_accountObject.getJSONObject("profile");
 
+            int id = jObject.getInt("id");
+
             String nickname = profileObject.getString("nickname");
-            String profile_image_url = profileObject.getString("profile_image_url");
-            String email = kakao_accountObject.getString("email");
+
+            String profile_image_url = null;
+            if (profileObject.isNull("profile_image_url") == false)
+                profile_image_url = profileObject.getString("profile_image_url");
+
+            String email = null;
+            if (kakao_accountObject.isNull("email") == false)
+                email = kakao_accountObject.getString("email");
 
             userBean.setKakao_id(id);
             userBean.setKakao_nickname(nickname);
