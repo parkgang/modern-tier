@@ -169,9 +169,18 @@ public class Kakao {
             HttpSession session = req.getSession(true);
             session.setAttribute("kakao_id", userBean.getKakao_id());
 
-            // 홈 화면인 react으로 이동
-            URI uri = new URI("/react/dist/");
-            return Response.seeOther(uri).build();
+            boolean isRiotAccount = userDAO.isUserRiotAccount(userBean.getKakao_id());
+
+            if (isRiotAccount == true) {
+                // 홈 화면인 react으로 이동
+                URI uri = new URI("/react/dist/");
+                return Response.seeOther(uri).build();
+            } else {
+                // riot 계정 등록 페이지로 이동
+                URI uri = new URI("/views/searchRiotAccount/");
+                return Response.seeOther(uri).build();
+            }
+
         } catch (Exception ex) {
             System.out.println("login 에러: " + ex);
         }
