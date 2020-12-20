@@ -12,10 +12,27 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="index.css"/>
+    <link rel="stylesheet" href="./index.css"/>
     <title>소환사 계정 선택</title>
 </head>
 <body>
-<div>선택하는 페이지 입니다</div>
+<div id="root">
+    <div>
+        <img src="http://ddragon.leagueoflegends.com/cdn/10.25.1/img/profileicon/<%=summonerDTO.getProfileIconId()%>.png"/>
+    </div>
+    <div>
+        <span><%=summonerDTO.getSummonerLevel()%></span>
+    </div>
+    <div>
+        <span><%=summonerDTO.getName()%></span>
+    </div>
+    <div>
+        <input type="text">
+    </div>
+    <div>
+        <button>다시 검색</button>
+        <button>선택</button>
+    </div>
+</div>
 </body>
 </html>
