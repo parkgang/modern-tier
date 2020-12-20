@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../../actions';
 import { PATH_ROOT } from '../../constants';
-import SearchUser from '../SearchUser';
+import { SearchUser, SearchUserNone, SearchUserSkeleton } from '../';
 
 import './index.css';
 
@@ -11,6 +11,7 @@ const friendSelector = (state) => state.friend;
 
 const Header = () => {
   useEffect(() => {
+    dispatch(actions.searchingUser());
     actions.searchUser('').then((res) => {
       dispatch(res);
     });
@@ -18,7 +19,7 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
-  const { list } = useSelector(friendSelector);
+  const { isLoading, list } = useSelector(friendSelector);
 
   // 레이어 팝업 설계의 문제로 생성된 함수 입니다. 다른 팝업이 활성화 되어있으면 종료합니다.
   const popUpController = (mode) => {
@@ -33,6 +34,11 @@ const Header = () => {
       toggle.click();
     }
   };
+
+  // 로딩 컴포넌트
+  const loading = new Array(5).fill(1).map((x, index) => {
+    return <SearchUserSkeleton key={index} />;
+  });
 
   // 렌더링 변수
   const friendList = list.map((x, index) => (
@@ -90,12 +96,21 @@ const Header = () => {
             type="text"
             placeholder="카카오톡 이름으로 검색"
             onChange={(e) => {
+              dispatch(actions.searchingUser());
               actions.searchUser(e.target.value).then((res) => {
                 dispatch(res);
               });
             }}
           />
-          <div>{friendList}</div>
+          <div>
+            {isLoading === true ? (
+              loading
+            ) : !list.length ? (
+              <SearchUserNone />
+            ) : (
+              friendList
+            )}
+          </div>
         </div>
       </div>
     </div>

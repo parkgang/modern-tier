@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Ranking from '../Ranking';
+import { Ranking } from '../';
 
 import './index.css';
 

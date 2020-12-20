@@ -1,14 +1,6 @@
 import * as types from './ActionTypes';
 import { request } from '../services';
 
-export const downCount = () => ({
-  type: types.DOWN,
-});
-
-export const upCount = () => ({
-  type: types.UP,
-});
-
 export const loginUser = async (kakaoId) => {
   const userProfile = await request(
     'get',
@@ -26,6 +18,14 @@ export const logoutUser = () => ({
 
 export const unlinkUser = () => ({
   type: types.UNLINK_USER,
+});
+
+export const loadingUserProfile = () => ({
+  type: types.LOADING_USER_PROFILE,
+});
+
+export const searchingUser = () => ({
+  type: types.SEARCHING_USER,
 });
 
 export const searchUser = async (nickname) => {

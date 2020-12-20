@@ -19,5 +19,11 @@ SearchUser.propTypes = {
   profileImage: PropTypes.string,
   isFriend: PropTypes.bool,
 };
+SearchUser.defaultProps = {
+  kakaoId: 0,
+  nickname: '',
+  profileImage: '',
+  isFriend: false,
+};
 
 export default SearchUser;

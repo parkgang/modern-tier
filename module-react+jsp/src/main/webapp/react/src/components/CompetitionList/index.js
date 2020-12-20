@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Competition from '../Competition';
+import { Competition } from '../';
 
 import './index.css';
 
