@@ -1,5 +1,6 @@
 import Header from './Header';
 import Profile from './Profile';
+import ProfileSkeleton from './ProfileSkeleton';
 import TabNavigator from './TabNavigator';
 import RankingList from './RankingList';
 import Ranking from './Ranking';
@@ -12,6 +13,7 @@ import SearchUserSkeleton from './SearchUserSkeleton';
 export {
   Header,
   Profile,
+  ProfileSkeleton,
   TabNavigator,
   RankingList,
   Ranking,

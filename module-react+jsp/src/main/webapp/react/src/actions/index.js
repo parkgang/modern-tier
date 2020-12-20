@@ -20,6 +20,10 @@ export const unlinkUser = () => ({
   type: types.UNLINK_USER,
 });
 
+export const loadingUserProfile = () => ({
+  type: types.LOADING_USER_PROFILE,
+});
+
 export const searchingUser = () => ({
   type: types.SEARCHING_USER,
 });

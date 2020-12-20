@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../actions';
-import { Header, Profile, TabNavigator } from '../components';
+import { Header, Profile, ProfileSkeleton, TabNavigator } from '../components';
 import { getSession } from '../services';
 import { USE_DOMAIN } from '../constants';
+
+const userSelector = (state) => state.user;
 
 export default function (InputComponent) {
   function OAuthCheck(props) {
     const dispatch = useDispatch();
+    const { isLoading } = useSelector(userSelector);
+
     useEffect(() => {
       getSession()
         .then((res) => {
@@ -17,6 +21,7 @@ export default function (InputComponent) {
           if (kakaoId === undefined) {
             window.location.href = USE_DOMAIN + '/views/kakaoOAuth/';
           } else {
+            dispatch(actions.loadingUserProfile());
             actions.loginUser(kakaoId).then((result) => {
               dispatch(result);
             });
@@ -34,7 +39,7 @@ export default function (InputComponent) {
     return (
       <>
         <Header />
-        <Profile />
+        {isLoading === true ? <ProfileSkeleton /> : <Profile />}
         <div id="content">
           <TabNavigator />
           <InputComponent />
