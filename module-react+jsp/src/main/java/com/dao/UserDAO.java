@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.constant.Service;
+import com.dto.SummonerDTO;
 import com.dto.UserBean;
 
 import javax.naming.Context;
@@ -280,6 +281,41 @@ public class UserDAO {
             return false;
         } catch (Exception ex) {
             throw new Exception("isUserRiotAccount 에러: ", ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
+    }
+
+    // 사용자 롤 계정 등록
+    public void userRiotInsert(int kakao_id, SummonerDTO summonerDTO) throws Exception {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+
+        try {
+            con = ds.getConnection();
+
+            sql = "update user set riot_id=?, riot_name=?, riot_profileIconId=? ,riot_summonerLevel=? where kakao_id = ?";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, summonerDTO.getId());
+            pstmt.setString(2, summonerDTO.getName());
+            pstmt.setInt(3, summonerDTO.getProfileIconId());
+            pstmt.setInt(4, summonerDTO.getSummonerLevel());
+            pstmt.setInt(5, kakao_id);
+            pstmt.executeUpdate();
+        } catch (Exception ex) {
+            throw new Exception("userRiotInsert 에러: ", ex);
         } finally {
             try {
                 if (rs != null)
