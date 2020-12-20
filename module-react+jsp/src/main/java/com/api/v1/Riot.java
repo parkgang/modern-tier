@@ -6,13 +6,14 @@ import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -81,5 +82,28 @@ public class Riot {
         } catch (Exception ex) {
             System.out.println("/v1/riot/search 에러: " + ex);
         }
+    }
+
+    @POST
+    @Path("/registerAccount")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    // riot 계정을 등록합니다
+    public Response registerAccount(@Context HttpServletRequest req,
+                                    @FormParam("id") String id,
+                                    @FormParam("name") String name,
+                                    @FormParam("profileIconId") String profileIconId,
+                                    @FormParam("summonerLevel") String summonerLevel) {
+
+        try {
+            System.out.println("apu run");
+            System.out.println("id: " + id);
+            System.out.println("name: " + name);
+            System.out.println("profileIconId: " + profileIconId);
+            System.out.println("summonerLevel: " + summonerLevel);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 }
