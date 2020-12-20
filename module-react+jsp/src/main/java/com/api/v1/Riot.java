@@ -1,6 +1,7 @@
 package com.api.v1;
 
 import com.constant.RiotApp;
+import com.dao.UserDAO;
 import com.dto.SummonerDTO;
 import org.json.JSONObject;
 
@@ -13,8 +14,8 @@ import javax.ws.rs.core.Response;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -91,17 +92,36 @@ public class Riot {
     public Response registerAccount(@Context HttpServletRequest req,
                                     @FormParam("id") String id,
                                     @FormParam("name") String name,
-                                    @FormParam("profileIconId") String profileIconId,
-                                    @FormParam("summonerLevel") String summonerLevel) {
+                                    @FormParam("profileIconId") int profileIconId,
+                                    @FormParam("summonerLevel") int summonerLevel) {
 
         try {
-            System.out.println("apu run");
-            System.out.println("id: " + id);
-            System.out.println("name: " + name);
-            System.out.println("profileIconId: " + profileIconId);
-            System.out.println("summonerLevel: " + summonerLevel);
+            int kakao_id = (int) req.getSession().getAttribute("kakao_id");
+
+            SummonerDTO summonerDTO = new SummonerDTO();
+            summonerDTO.setId(id);
+            summonerDTO.setName(name);
+            summonerDTO.setProfileIconId(profileIconId);
+            summonerDTO.setSummonerLevel(summonerLevel);
+
+            System.out.println("소환사 등록");
+            System.out.println("Kakao_id: " + kakao_id);
+            System.out.println("riot_id: " + id);
+            System.out.println("riot_name: " + name);
+            System.out.println("riot_profileIconId: " + profileIconId);
+            System.out.println("riot_summonerLevel: " + summonerLevel);
+            System.out.println("");
+
+            // 롤 계정 등록
+            UserDAO userDAO = UserDAO.getInstance();
+            userDAO.userRiotInsert(kakao_id, summonerDTO);
+
+            // 홈 화면인 react으로 이동
+            URI uri = new URI("/react/dist/");
+            return Response.seeOther(uri).build();
+
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("/v1/riot/registerAccount 에러: " + ex);
         }
 
         return null;
