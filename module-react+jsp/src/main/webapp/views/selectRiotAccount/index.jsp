@@ -4,12 +4,6 @@
     final String resourcesPath = "/views/selectRiotAccount";
 
     SummonerDTO summonerDTO = (SummonerDTO) request.getAttribute("summonerDTO");
-    System.out.println("소환사 검색 결과");
-    System.out.println("Id: " + summonerDTO.getId());
-    System.out.println("Name: " + summonerDTO.getName());
-    System.out.println("ProfileIconId: " + summonerDTO.getProfileIconId());
-    System.out.println("SummonerLevel: " + summonerDTO.getSummonerLevel());
-    System.out.println("");
 %>
 <html>
 <head>
