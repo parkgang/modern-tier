@@ -5,6 +5,8 @@ const LOCAL_DOMAIN = 'http://localhost:8080';
 
 export const USE_DOMAIN = SERVER_DOMAIN;
 
+export const KAKAO_JAVASCRIPT_KEY = 'bc8b0e73cd18ca786bdfafacaa3dd53e';
+
 export const PATH_ROOT = '/react/dist';
 
 export const PATH_COMPETITION = '/competition';

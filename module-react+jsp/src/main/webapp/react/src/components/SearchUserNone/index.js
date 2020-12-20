@@ -3,6 +3,7 @@ import React from 'react';
 import './index.css';
 
 const kakaoLinkSend = () => {
+  // eslint-disable-next-line no-undef
   Kakao.Link.sendDefault({
     objectType: 'text',
     text: '회원님이 Modern tier를 함께 사용하고 싶어 합니다!',
