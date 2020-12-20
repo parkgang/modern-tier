@@ -9,11 +9,6 @@ button {
     background-color: rgba(0, 0, 0, 0);
 }
 
-img {
-    width: 90px;
-    height: 45px;
-}
-
 #root {
     display: block;
     margin: 0 auto;
@@ -26,19 +21,25 @@ img {
 }
 
 #root > div:nth-child(1) span {
-    font-size: 50px;
+    font-size: 30px;
     font-weight: bold;
 }
 
 #root > div:nth-child(2) {
+    font-size: 13px;
     margin-bottom: 30px;
 }
 
 #root form input {
     width: 250px;
-    height: 35px;
+    height: 40px;
     border: 2px solid black;
     border-radius: 5px;
     padding: 10px 10px 10px 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+#root form img {
+    width: 90px;
+    height: 45px;
 }
