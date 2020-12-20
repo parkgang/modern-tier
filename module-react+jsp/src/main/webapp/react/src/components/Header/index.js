@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../../actions';
-import { PATH_ROOT } from '../../constants';
+import { PATH_ROOT, USE_DOMAIN } from '../../constants';
 import { SearchUser, SearchUserNone, SearchUserSkeleton } from '../';
 
 import './index.css';
@@ -68,6 +68,16 @@ const Header = () => {
         </label>
         <div id="burger-menu-list">
           <ul>
+            <li>
+              <button
+                onClick={() =>
+                  (window.location.href =
+                    USE_DOMAIN + '/views/searchRiotAccount/')
+                }
+              >
+                LOL 계정 변경
+              </button>
+            </li>
             <li>
               <button onClick={() => dispatch(actions.logoutUser())}>
                 로그아웃
