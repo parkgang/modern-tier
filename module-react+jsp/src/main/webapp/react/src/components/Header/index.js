@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../../actions';
 import { PATH_ROOT } from '../../constants';
-import { SearchUser, SearchUserSkeleton } from '../';
+import { SearchUser, SearchUserNone, SearchUserSkeleton } from '../';
 
 import './index.css';
 
@@ -102,7 +102,15 @@ const Header = () => {
               });
             }}
           />
-          <div>{isLoading === true ? loading : friendList}</div>
+          <div>
+            {isLoading === true ? (
+              loading
+            ) : !list.length ? (
+              <SearchUserNone />
+            ) : (
+              friendList
+            )}
+          </div>
         </div>
       </div>
     </div>

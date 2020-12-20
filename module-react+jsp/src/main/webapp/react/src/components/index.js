@@ -8,6 +8,7 @@ import CompetitionList from './CompetitionList';
 import Competition from './Competition';
 import NotFound from './NotFound';
 import SearchUser from './SearchUser';
+import SearchUserNone from './SearchUserNone';
 import SearchUserSkeleton from './SearchUserSkeleton';
 
 export {
@@ -21,5 +22,6 @@ export {
   Competition,
   NotFound,
   SearchUser,
+  SearchUserNone,
   SearchUserSkeleton,
 };
