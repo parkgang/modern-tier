@@ -1,6 +1,6 @@
 package com.dto;
 
-public class UserBean {
+public class UserDTO {
     private int id;
     private int kakao_id;
     private String kakao_nickname;
@@ -13,7 +13,7 @@ public class UserBean {
     private int riot_profileIconId;
     private int riot_summonerLevel;
 
-    public UserBean() {
+    public UserDTO() {
         this.id = 0;
         this.kakao_id = 0;
         this.kakao_nickname = null;

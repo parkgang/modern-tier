@@ -2,7 +2,7 @@ package com.dao;
 
 import com.constant.Service;
 import com.dto.SummonerDTO;
-import com.dto.UserBean;
+import com.dto.UserDTO;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -36,7 +36,7 @@ public class UserDAO {
     }
 
     // 중복되는 사용자를 구별하기 위해 회원 정보 조회
-    public boolean isUser(UserBean user) throws Exception {
+    public boolean isUser(UserDTO user) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -72,7 +72,7 @@ public class UserDAO {
     }
 
     // 회원 가입
-    public void userInsert(UserBean user) throws Exception {
+    public void userInsert(UserDTO user) throws Exception {
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -231,7 +231,7 @@ public class UserDAO {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                UserBean userBean = new UserBean();
+                UserDTO userBean = new UserDTO();
 
                 userBean.setKakao_id(rs.getInt("kakao_id"));
                 userBean.setKakao_nickname(rs.getString("kakao_nickname"));
