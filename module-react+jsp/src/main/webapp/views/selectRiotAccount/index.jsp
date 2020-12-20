@@ -50,9 +50,15 @@
         <button type="submit" style="cursor:pointer" onclick="nullCheck() && document.summonerForm.submit()">
             <img src="<%=resourcesPath%>/lol_research_button.png">
         </button>
-        <button type="submit" style="cursor:pointer">
+        <button type="submit" style="cursor:pointer" onclick="document.reqHiddenForm.submit()">
             <img src="<%=resourcesPath%>/lol_select_button.png">
         </button>
+        <form name="reqHiddenForm" method="post" action="/api/v1/riot/registerAccount">
+            <input type="hidden" name="id" value="<%=summonerDTO.getId()%>">
+            <input type="hidden" name="name" value="<%=summonerDTO.getName()%>">
+            <input type="hidden" name="profileIconId" value="<%=summonerDTO.getProfileIconId()%>">
+            <input type="hidden" name="summonerLevel" value="<%=summonerDTO.getSummonerLevel()%>">
+        </form>
     </div>
 </div>
 </body>
