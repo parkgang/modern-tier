@@ -1,7 +1,8 @@
 package com.dao;
 
 import com.constant.Service;
-import com.dto.UserBean;
+import com.dto.SummonerDTO;
+import com.dto.UserDTO;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -35,7 +36,7 @@ public class UserDAO {
     }
 
     // 중복되는 사용자를 구별하기 위해 회원 정보 조회
-    public boolean isUser(UserBean user) throws Exception {
+    public boolean isUser(UserDTO user) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -71,7 +72,7 @@ public class UserDAO {
     }
 
     // 회원 가입
-    public void userInsert(UserBean user) throws Exception {
+    public void userInsert(UserDTO user) throws Exception {
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -230,7 +231,7 @@ public class UserDAO {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                UserBean userBean = new UserBean();
+                UserDTO userBean = new UserDTO();
 
                 userBean.setKakao_id(rs.getInt("kakao_id"));
                 userBean.setKakao_nickname(rs.getString("kakao_nickname"));
@@ -242,6 +243,79 @@ public class UserDAO {
             return list;
         } catch (Exception ex) {
             throw new Exception("userSearch 에러: ", ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
+    }
+
+    // 사용자 롤 계정 등록 여부 조회
+    public boolean isUserRiotAccount(int kakao_id) throws Exception {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = ds.getConnection();
+
+            String sql = "select riot_id from user where kakao_id = ?;";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, kakao_id);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String riotId = rs.getString("riot_id");
+                return riotId == null ? false : true;
+            }
+            System.out.println("발생할 수 없는 예외: kakao login된 사용자임에 불구하고 레코드 조회가 되지않습니다.");
+
+            return false;
+        } catch (Exception ex) {
+            throw new Exception("isUserRiotAccount 에러: ", ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
+    }
+
+    // 사용자 롤 계정 등록
+    public void userRiotInsert(int kakao_id, SummonerDTO summonerDTO) throws Exception {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+
+        try {
+            con = ds.getConnection();
+
+            sql = "update user set riot_id=?, riot_name=?, riot_profileIconId=? ,riot_summonerLevel=? where kakao_id = ?";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, summonerDTO.getId());
+            pstmt.setString(2, summonerDTO.getName());
+            pstmt.setInt(3, summonerDTO.getProfileIconId());
+            pstmt.setInt(4, summonerDTO.getSummonerLevel());
+            pstmt.setInt(5, kakao_id);
+            pstmt.executeUpdate();
+        } catch (Exception ex) {
+            throw new Exception("userRiotInsert 에러: ", ex);
         } finally {
             try {
                 if (rs != null)

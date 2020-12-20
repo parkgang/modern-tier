@@ -1,6 +1,6 @@
 package com.dto;
 
-public class UserBean {
+public class UserDTO {
     private int id;
     private int kakao_id;
     private String kakao_nickname;
@@ -10,9 +10,10 @@ public class UserBean {
     private String kakao_refresh_token;
     private String riot_id;
     private String riot_name;
+    private int riot_profileIconId;
     private int riot_summonerLevel;
 
-    public UserBean() {
+    public UserDTO() {
         this.id = 0;
         this.kakao_id = 0;
         this.kakao_nickname = null;
@@ -22,6 +23,7 @@ public class UserBean {
         this.kakao_refresh_token = null;
         this.riot_id = null;
         this.riot_name = null;
+        this.riot_profileIconId = 0;
         this.riot_summonerLevel = 0;
     }
 
@@ -95,6 +97,14 @@ public class UserBean {
 
     public void setRiot_name(String riot_name) {
         this.riot_name = riot_name;
+    }
+
+    public int getRiot_profileIconId() {
+        return riot_profileIconId;
+    }
+
+    public void setRiot_profileIconId(int riot_profileIconId) {
+        this.riot_profileIconId = riot_profileIconId;
     }
 
     public int getRiot_summonerLevel() {

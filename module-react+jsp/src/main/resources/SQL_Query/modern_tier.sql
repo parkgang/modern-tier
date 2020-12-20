@@ -17,6 +17,7 @@ CREATE TABLE user
     kakao_refresh_token     VARCHAR(60),
     riot_id                 VARCHAR(60) UNIQUE,
     riot_name               VARCHAR(20),
+    riot_profileIconId      INT,
     riot_summonerLevel      INT,
     PRIMARY KEY (id, kakao_id)
 );
@@ -48,4 +49,7 @@ set kakao_nickname='1',
     kakao_refresh_token='4'
 where kakao_id = 1536694714;
 
-
+# 사용자 롤 계정 등록 여부 체크
+select riot_id
+from user
+where kakao_id = 1536694714;

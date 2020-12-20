@@ -30,7 +30,7 @@
 #burger-menu-list {
   display: none;
   background-color: white;
-  width: 80px;
+  width: 100px;
   border: 1px solid gray;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -51,7 +51,7 @@
   display: block;
   position: absolute;
   top: calc(24px + 10px);
-  left: calc(24px + -75px);
+  left: calc(24px + -95px);
 }
 
 /* 팝업 부모 위치 정의 */

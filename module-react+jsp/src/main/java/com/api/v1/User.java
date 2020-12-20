@@ -1,7 +1,7 @@
 package com.api.v1;
 
 import com.dao.UserDAO;
-import com.dto.UserBean;
+import com.dto.UserDTO;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -159,7 +159,7 @@ public class User {
             for (int i = 0; i < userList.size(); i++) {
                 JSONObject jsonObject = new JSONObject();
 
-                UserBean user = (UserBean) userList.get(i);
+                UserDTO user = (UserDTO) userList.get(i);
 
                 jsonObject.put("kakaoId", user.getKakao_id());
                 jsonObject.put("nickname", user.getKakao_nickname());
