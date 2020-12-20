@@ -39,4 +39,16 @@ docker run -p 8888:8080 tomcat-modern-tier:1
 
 # 이슈
 
-Kakao OAuth Redirect URI이 도메인이 아닌 public IP으로 넘어가서 서비스 접속시 public IP으로 들어가야합니다 
+Kakao OAuth Redirect URI이 도메인이 아닌 public IP으로 넘어가서 서비스 접속시 public IP으로 들어가야합니다
+
+# local 환경 구축
+
+## 의존성 변경
+
+1. `module-react+jsp/src/main/java/com/constant/Service.java`의 `USE_DOMAIN = LOCAL_DOMAIN;`으로 수정
+1. `module-react+jsp/src/main/webapp/react/src/constants/index.js`의 `export const USE_DOMAIN = LOCAL_DOMAIN;`으로 수정
+
+## 빌드 프로세스
+
+1. `react`에서 `yarn build`
+1. tomcat 실행
