@@ -8,8 +8,8 @@ import { USE_DOMAIN } from '../constants';
 
 const userSelector = (state) => state.user;
 
-export default function (InputComponent) {
-  function OAuthCheck(props) {
+export default (InputComponent) => {
+  const OAuthCheck = (props) => {
     const dispatch = useDispatch();
     const { isLoading } = useSelector(userSelector);
 
@@ -46,6 +46,6 @@ export default function (InputComponent) {
         </div>
       </>
     );
-  }
+  };
   return OAuthCheck;
-}
+};
