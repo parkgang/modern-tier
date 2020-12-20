@@ -255,4 +255,42 @@ public class UserDAO {
             }
         }
     }
+
+    // 사용자 롤 계정 등록 여부 조회
+    public boolean isUserRiotAccount(int kakao_id) throws Exception {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = ds.getConnection();
+
+            String sql = "select riot_id from user where kakao_id = ?;";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, kakao_id);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String riotId = rs.getString("riot_id");
+                return riotId == null ? false : true;
+            }
+            System.out.println("발생할 수 없는 예외: kakao login된 사용자임에 불구하고 레코드 조회가 되지않습니다.");
+
+            return false;
+        } catch (Exception ex) {
+            throw new Exception("isUserRiotAccount 에러: ", ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
+    }
 }
