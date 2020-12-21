@@ -7,3 +7,6 @@ export const SEARCHING_USER = 'SEARCHING_USER';
 export const SEARCH_USER = 'SEARCH_USER';
 export const ADD_FRIEND = 'ADD_FRIEND';
 export const DEL_FRIEND = 'DEL_FRIEND';
+
+export const LOADING_RANKING = 'LOADING_RANKING';
+export const REQUEST_RANKING = 'REQUEST_RANKING';
