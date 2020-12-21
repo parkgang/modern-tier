@@ -10,7 +10,7 @@ const Ranking = ({ key, ranking, kakaoNickname, kakaoProfileImageUrl, riotName, 
       <span>&nbsp;&nbsp;</span>
       <img src={kakaoProfileImageUrl} />
       <span>&nbsp;&nbsp;</span>
-      <img src="/src/resources/icon/ranked-emblems/Emblem_Platinum.png" />
+      <img src="/react/src/resources/icon/ranked-emblems/Emblem_Platinum.png" />
       <span>&nbsp;&nbsp;</span>
       <span>{tier + ' ' + rank}</span>
       <span>&nbsp;&nbsp;</span>
