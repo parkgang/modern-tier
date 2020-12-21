@@ -11,7 +11,7 @@ const userSelector = (state) => state.user;
 export default (InputComponent) => {
   const OAuthCheck = (props) => {
     const dispatch = useDispatch();
-    const { isLoading } = useSelector(userSelector);
+    const { isLoading, nickName } = useSelector(userSelector);
 
     useEffect(() => {
       getSession()
@@ -21,11 +21,13 @@ export default (InputComponent) => {
           if (kakaoId === undefined) {
             window.location.href = USE_DOMAIN + '/views/kakaoOAuth/';
           } else {
-            dispatch(actions.loadingUserProfile());
-            actions.loginUser(kakaoId).then((result) => {
-              dispatch(result);
-            });
-            // dispatch(actions.loginUser(kakaoId)); 와 동일합니다
+            if (nickName === null) {
+              dispatch(actions.loadingUserProfile());
+              actions.loginUser(kakaoId).then((result) => {
+                dispatch(result);
+              });
+              // dispatch(actions.loginUser(kakaoId)); 와 동일합니다
+            }
           }
         })
         .catch((err) => {
@@ -39,7 +41,7 @@ export default (InputComponent) => {
         <Header />
         {isLoading === true ? <ProfileSkeleton /> : <Profile />}
         <div id="content">
-          <TabNavigator />
+          <TabNavigator page={InputComponent.name} />
           <InputComponent />
         </div>
       </>
