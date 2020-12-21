@@ -23,7 +23,7 @@ public class UserDAO {
             Context context = new InitialContext();
             ds = (DataSource) context.lookup("java:comp/env/" + Service.DATABASE_NAME);
         } catch (Exception ex) {
-            System.out.println("DB연결 실패: " + ex);
+            System.out.println("UserDAO DB연결 실패: " + ex);
         }
     }
 
@@ -56,7 +56,8 @@ public class UserDAO {
             else
                 return false;
         } catch (Exception ex) {
-            throw new Exception("isUser 에러: ", ex);
+            System.out.println("isUser 에러: " + ex);
+            throw new Exception("isUser 에러");
         } finally {
             try {
                 if (rs != null)
@@ -66,7 +67,8 @@ public class UserDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("isUser DB종료 실패: " + ex);
+                throw new Exception("isUser DB종료 실패");
             }
         }
     }
@@ -114,9 +116,11 @@ public class UserDAO {
                 result = pstmt.executeUpdate();
             }
         } catch (SQLIntegrityConstraintViolationException ex) {
-            throw new SQLIntegrityConstraintViolationException("중복되는 아이디가 존재합니다: ", ex);
+            System.out.println("userInsert 에러 (중복되는 아이디가 존재합니다): " + ex);
+            throw new SQLIntegrityConstraintViolationException("userInsert 에러 (중복되는 아이디가 존재합니다)");
         } catch (Exception ex) {
-            throw new Exception("userInsert 에러: ", ex);
+            System.out.println("userInsert 에러: " + ex);
+            throw new Exception("userInsert 에러");
         } finally {
             try {
                 if (rs != null)
@@ -126,7 +130,8 @@ public class UserDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("userInsert DB종료 실패: " + ex);
+                throw new Exception("DB종료 실패");
             }
         }
     }
@@ -164,7 +169,8 @@ public class UserDAO {
 
             return kakao_access_token;
         } catch (Exception ex) {
-            throw new Exception("userWithdrawal 에러: ", ex);
+            System.out.println("userWithdrawal 에러: " + ex);
+            throw new Exception("userWithdrawal 에러");
         } finally {
             try {
                 if (rs != null)
@@ -174,7 +180,8 @@ public class UserDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("userWithdrawal DB종료 실패: " + ex);
+                throw new Exception("userWithdrawal DB종료 실패");
             }
         }
     }
@@ -197,7 +204,8 @@ public class UserDAO {
             if (rs.next())
                 return rs.getString("kakao_access_token");
         } catch (Exception ex) {
-            throw new Exception("userKakaoAccessToken 에러: ", ex);
+            System.out.println("userKakaoAccessToken 에러: " + ex);
+            throw new Exception("userKakaoAccessToken 에러");
         } finally {
             try {
                 if (rs != null)
@@ -207,7 +215,8 @@ public class UserDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("userKakaoAccessToken DB종료 실패: " + ex);
+                throw new Exception("userKakaoAccessToken DB종료 실패");
             }
         }
         return null;
@@ -242,7 +251,8 @@ public class UserDAO {
 
             return list;
         } catch (Exception ex) {
-            throw new Exception("userSearch 에러: ", ex);
+            System.out.println("userSearch 에러: " + ex);
+            throw new Exception("userSearch 에러");
         } finally {
             try {
                 if (rs != null)
@@ -252,7 +262,8 @@ public class UserDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("userSearch DB종료 실패: " + ex);
+                throw new Exception("userSearch DB종료 실패");
             }
         }
     }
@@ -280,7 +291,8 @@ public class UserDAO {
 
             return false;
         } catch (Exception ex) {
-            throw new Exception("isUserRiotAccount 에러: ", ex);
+            System.out.println("isUserRiotAccount 에러: " + ex);
+            throw new Exception("isUserRiotAccount 에러");
         } finally {
             try {
                 if (rs != null)
@@ -290,7 +302,8 @@ public class UserDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("isUserRiotAccount DB종료 실패: " + ex);
+                throw new Exception("isUserRiotAccount DB종료 실패");
             }
         }
     }
@@ -315,9 +328,11 @@ public class UserDAO {
             pstmt.setInt(5, kakao_id);
             pstmt.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException ex) {
-            throw new SQLIntegrityConstraintViolationException("중복되는 아이디가 존재합니다: ", ex);
+            System.out.println("userRiotInsert 에러 (중복되는 아이디가 존재합니다): " + ex);
+            throw new SQLIntegrityConstraintViolationException("userRiotInsert 에러 (중복되는 아이디가 존재합니다)");
         } catch (Exception ex) {
-            throw new Exception("userRiotInsert 에러: ", ex);
+            System.out.println("userRiotInsert 에러: " + ex);
+            throw new Exception("userRiotInsert 에러");
         } finally {
             try {
                 if (rs != null)
@@ -327,7 +342,8 @@ public class UserDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("userRiotInsert DB종료 실패: " + ex);
+                throw new Exception("userRiotInsert DB종료 실패");
             }
         }
     }
@@ -351,7 +367,8 @@ public class UserDAO {
             // 값이 존재하면 이미 등록된 소환사 이므로 false를 반환합니다.
             return rs.next() ? false : true;
         } catch (Exception ex) {
-            throw new Exception("isUniqueSummoner 에러: ", ex);
+            System.out.println("isUniqueSummoner 에러: " + ex);
+            throw new Exception("isUniqueSummoner 에러");
         } finally {
             try {
                 if (rs != null)
@@ -361,7 +378,8 @@ public class UserDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("isUniqueSummoner DB종료 실패: " + ex);
+                throw new Exception("isUniqueSummoner DB종료 실패");
             }
         }
     }

@@ -17,7 +17,7 @@ public class FriendDAO {
             Context context = new InitialContext();
             ds = (DataSource) context.lookup("java:comp/env/" + Service.DATABASE_NAME);
         } catch (Exception ex) {
-            System.out.println("DB연결 실패: " + ex);
+            System.out.println("FriendDAO DB연결 실패: " + ex);
         }
     }
 
@@ -47,7 +47,8 @@ public class FriendDAO {
 
             pstmt.executeUpdate();
         } catch (Exception ex) {
-            throw new Exception("friendInsert 에러: ", ex);
+            System.out.println("friendInsert 에러: " + ex);
+            throw new Exception("friendInsert 에러");
         } finally {
             try {
                 if (rs != null)
@@ -57,7 +58,8 @@ public class FriendDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("friendInsert DB종료 실패: " + ex);
+                throw new Exception("friendInsert DB종료 실패");
             }
         }
     }
@@ -80,7 +82,8 @@ public class FriendDAO {
 
             pstmt.executeUpdate();
         } catch (Exception ex) {
-            throw new Exception("friendDelete 에러: ", ex);
+            System.out.println("friendDelete 에러: " + ex);
+            throw new Exception("friendDelete 에러");
         } finally {
             try {
                 if (rs != null)
@@ -90,7 +93,8 @@ public class FriendDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("friendDelete DB종료 실패: " + ex);
+                throw new Exception("friendDelete DB종료 실패");
             }
         }
     }
@@ -115,7 +119,8 @@ public class FriendDAO {
 
             return rs.next();
         } catch (Exception ex) {
-            throw new Exception("isWithFriend 에러: ", ex);
+            System.out.println("isWithFriend 에러: " + ex);
+            throw new Exception("isWithFriend 에러");
         } finally {
             try {
                 if (rs != null)
@@ -125,7 +130,8 @@ public class FriendDAO {
                 if (con != null)
                     con.close();
             } catch (Exception ex) {
-                throw new Exception("DB종료 실패: ", ex);
+                System.out.println("isWithFriend DB종료 실패: " + ex);
+                throw new Exception("isWithFriend DB종료 실패");
             }
         }
     }
