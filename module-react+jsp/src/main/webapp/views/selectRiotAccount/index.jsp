@@ -7,7 +7,7 @@
 %>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <%--REST API를 통해 이동된 페이지 때문인지는 몰라도 상대 경로로 콘텐츠를 로드하지 못하는 이슈가 존재합니다. 때문에 절대 경로로 지정합니다.--%>
     <link rel="stylesheet" href="<%=resourcesPath%>/index.css"/>
     <title>소환사 계정 선택</title>
