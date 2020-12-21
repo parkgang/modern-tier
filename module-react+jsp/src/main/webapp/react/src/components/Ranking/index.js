@@ -27,8 +27,6 @@ const Ranking = ({ ranking, kakaoNickname, kakaoProfileImageUrl, riotName, riotP
     }
   };
 
-  console.log('반환 값' + tierFileName());
-
   return (
     <div id={'Ranking' + ranking} className="ranking">
       <span>{ranking + '.'}</span>
