@@ -152,7 +152,14 @@ public class User {
     // 사용자 검색
     public Response search(@Context HttpServletRequest req, @QueryParam("kakaoNickname") String kakaoNickname) {
         try {
-            int kakaoId = (int) req.getSession().getAttribute("kakao_id");
+            kakaoNickname = kakaoNickname.trim();
+
+            int kakaoId = 0;
+            try {
+                kakaoId = (int) req.getSession().getAttribute("kakao_id");
+            } catch (NullPointerException ex) {
+                System.out.println("/v1/user/search 알려진 예외: 세션 값이 없습니다. (로그인 전 렌더링 되면서 생기는 이슈, 실제 사용은 로그인 이후라 동작에는 문제가 없습니다.)");
+            }
 
             FriendDAO friendDAO = FriendDAO.getInstance();
 
@@ -168,14 +175,17 @@ public class User {
                 if (kakaoId != user.getKakao_id()) {
                     boolean isFriend = friendDAO.isWithFriend(kakaoId, user.getKakao_id());
 
-                    JSONObject jsonObject = new JSONObject();
+                    // 빈값을 입력하면 등록된 친구만 출력합니다.
+                    if (!kakaoNickname.isEmpty() || isFriend) {
+                        JSONObject jsonObject = new JSONObject();
 
-                    jsonObject.put("kakaoId", user.getKakao_id());
-                    jsonObject.put("nickname", user.getKakao_nickname());
-                    jsonObject.put("profileImage", user.getKakao_profile_image_url());
-                    jsonObject.put("isFriend", isFriend);
+                        jsonObject.put("kakaoId", user.getKakao_id());
+                        jsonObject.put("nickname", user.getKakao_nickname());
+                        jsonObject.put("profileImage", user.getKakao_profile_image_url());
+                        jsonObject.put("isFriend", isFriend);
 
-                    resJSON.put(jsonObject);
+                        resJSON.put(jsonObject);
+                    }
                 }
             }
 
