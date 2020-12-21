@@ -22,6 +22,20 @@ import java.net.URLEncoder;
 @Path("/v1/riot")
 public class Riot {
 
+    public void resModal(@Context HttpServletResponse res, String content, String href) {
+        try {
+            res.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = res.getWriter();
+            out.println("<script>");
+            out.println("alert('" + content + "');");
+            out.println("location.href='" + href + "';");
+            out.println("</script>");
+            out.flush();
+        } catch (Exception ex) {
+            System.out.println("/v1/riot의 resModal 에러: " + ex);
+        }
+    }
+
     @GET
     @Path("/search")
     // riot 계정을 검색합니다
@@ -65,16 +79,19 @@ public class Riot {
                     summonerDTO.setProfileIconId(profileIconId);
                     summonerDTO.setSummonerLevel(summonerLevel);
 
-                    // 소환사 선택 페이지로 이동
-                    req.setAttribute("summonerDTO", summonerDTO);
-                    req.getRequestDispatcher("/views/selectRiotAccount/").forward(req, res);
+                    // 이미 등록된 소환사 여부 체크
+                    UserDAO userDAO = UserDAO.getInstance();
+                    if (userDAO.isUniqueSummoner(id) == false)
+                        resModal(res, "이미 등록된 소환사 입니다.", "/views/searchRiotAccount/");
+                    else {
+                        // 소환사 선택 페이지로 이동
+                        req.setAttribute("summonerDTO", summonerDTO);
+                        req.getRequestDispatcher("/views/selectRiotAccount/").forward(req, res);
+                    }
                     break;
                 // 소환사를 찾을 수 없음
                 case 404:
-                    res.setContentType("text/html; charset=UTF-8");
-                    PrintWriter out = res.getWriter();
-                    out.println("<script>alert('소환사를 찾을 수 없습니다'); location.href='/views/searchRiotAccount/';</script>");
-                    out.flush();
+                    resModal(res, "소환사를 찾을 수 없습니다.", "/views/searchRiotAccount/");
                     break;
                 default:
                     System.out.println("예상하지 못한 상태 코드 입니다. 로그를 확인해 주세요.");
