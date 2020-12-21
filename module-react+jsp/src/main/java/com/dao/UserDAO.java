@@ -314,8 +314,44 @@ public class UserDAO {
             pstmt.setInt(4, summonerDTO.getSummonerLevel());
             pstmt.setInt(5, kakao_id);
             pstmt.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            throw new SQLIntegrityConstraintViolationException("중복되는 아이디가 존재합니다: ", ex);
         } catch (Exception ex) {
             throw new Exception("userRiotInsert 에러: ", ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
+    }
+
+    // 등록된 소환사 여부 조회
+    public boolean isUniqueSummoner(String riotId) throws Exception {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+
+        try {
+            con = ds.getConnection();
+
+            sql = "select * from user where riot_id = ?;";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, riotId);
+            rs = pstmt.executeQuery();
+
+            // 값이 존재하면 이미 등록된 소환사 이므로 false를 반환합니다.
+            return rs.next() ? false : true;
+        } catch (Exception ex) {
+            throw new Exception("isUniqueSummoner 에러: ", ex);
         } finally {
             try {
                 if (rs != null)

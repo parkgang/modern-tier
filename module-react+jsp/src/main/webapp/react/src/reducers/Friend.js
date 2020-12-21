@@ -25,10 +25,7 @@ export default (state = initialState, action) => {
         list: action.payload.map((x) => ({
           kakaoId: x.kakaoId,
           nickname: x.nickname,
-          profileImage:
-            x.profileImage === undefined
-              ? '/react/src/resources/img/kakaoTalk-default-profile.jpg'
-              : x.profileImage,
+          profileImage: x.profileImage === undefined ? '/react/src/resources/img/kakaoTalk-default-profile.jpg' : x.profileImage,
           isFriend: x.isFriend,
         })),
       };

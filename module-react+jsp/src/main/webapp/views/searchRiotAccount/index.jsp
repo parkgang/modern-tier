@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" href="index.css"/>
     <title>소환사 계정 등록</title>
 </head>

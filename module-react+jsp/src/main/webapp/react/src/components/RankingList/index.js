@@ -24,9 +24,7 @@ const RankingList = () => {
     },
   ];
   // 렌더링 변수
-  const rankingList = rankingData.map((x, index) => (
-    <Ranking key={index} id={x.id} name={x.name} tier={x.tier} />
-  ));
+  const rankingList = rankingData.map((x, index) => <Ranking key={index} id={x.id} name={x.name} tier={x.tier} />);
   return <div id="rankingList">{rankingList}</div>;
 };
 

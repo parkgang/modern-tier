@@ -29,9 +29,7 @@ export default (InputComponent) => {
           }
         })
         .catch((err) => {
-          console.error(
-            `REST API Server가 비활성화되어 있을 확률이 높습니다: ${err}`
-          );
+          console.error(`REST API Server가 비활성화되어 있을 확률이 높습니다: ${err}`);
           window.location.href = USE_DOMAIN + '/views/kakaoOAuth/';
         });
     }, []);
