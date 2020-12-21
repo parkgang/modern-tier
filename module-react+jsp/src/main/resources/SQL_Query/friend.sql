@@ -23,6 +23,9 @@ from friend
          inner join user u on friend.friend_kakao_id = u.kakao_id
 where friend.kakao_id = 1536694714;
 
+# 사용자와 친구 관계 확인
+select * from friend where kakao_id = 1536694714 and friend_kakao_id = 1561304349;
+
 # 삭제
 delete from friend;
 delete from friend where kakao_id = 1536694714 and friend_kakao_id = 1561304829;
