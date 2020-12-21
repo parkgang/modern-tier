@@ -33,3 +33,13 @@ export const searchUser = async (nickname) => {
     payload: userList.data,
   };
 };
+
+export const addFriend = async (kakaoId) => {
+  const res = await request('get', `/api/v1/friend/add?friendKakaoId=${kakaoId}`);
+  if (res.status === 200) {
+    return {
+      type: types.ADD_FRIEND,
+      kakaoId,
+    };
+  }
+};

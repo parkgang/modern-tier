@@ -30,6 +30,18 @@ export default (state = initialState, action) => {
         })),
       };
     // return { ...state, keyword: action.nickname, list: action.payload };
+    case types.ADD_FRIEND:
+      return {
+        ...state,
+        list: state.list.map((x) =>
+          x.kakaoId === action.kakaoId
+            ? {
+                ...x,
+                isFriend: true,
+              }
+            : x
+        ),
+      };
     default:
       return state;
   }
