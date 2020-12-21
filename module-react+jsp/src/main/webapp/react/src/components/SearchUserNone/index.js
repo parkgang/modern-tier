@@ -30,6 +30,9 @@ const SearchUserNone = ({ title, content1, content2 }) => {
           <img src="/react/src/resources/img/kakaolink_btn_small.png" />
         </button>
       </div>
+      <div>
+        <span>버튼을 눌러 공유하기</span>
+      </div>
     </div>
   );
 };
