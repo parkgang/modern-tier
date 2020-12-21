@@ -41,15 +41,7 @@ const Header = () => {
   });
 
   // 렌더링 변수
-  const friendList = list.map((x, index) => (
-    <SearchUser
-      key={index}
-      kakaoId={x.kakaoId}
-      nickname={x.nickname}
-      profileImage={x.profileImage}
-      isFriend={x.isFriend}
-    />
-  ));
+  const friendList = list.map((x, index) => <SearchUser key={index} kakaoId={x.kakaoId} nickname={x.nickname} profileImage={x.profileImage} isFriend={x.isFriend} />);
 
   return (
     <div id="header">
@@ -69,24 +61,13 @@ const Header = () => {
         <div id="burger-menu-list">
           <ul>
             <li>
-              <button
-                onClick={() =>
-                  (window.location.href =
-                    USE_DOMAIN + '/views/searchRiotAccount/')
-                }
-              >
-                LOL 계정 변경
-              </button>
+              <button onClick={() => (window.location.href = USE_DOMAIN + '/views/searchRiotAccount/')}>LOL 계정 변경</button>
             </li>
             <li>
-              <button onClick={() => dispatch(actions.logoutUser())}>
-                로그아웃
-              </button>
+              <button onClick={() => dispatch(actions.logoutUser())}>로그아웃</button>
             </li>
             <li>
-              <button onClick={() => dispatch(actions.unlinkUser())}>
-                탈퇴
-              </button>
+              <button onClick={() => dispatch(actions.unlinkUser())}>탈퇴</button>
             </li>
           </ul>
         </div>
@@ -112,15 +93,7 @@ const Header = () => {
               });
             }}
           />
-          <div>
-            {isLoading === true ? (
-              loading
-            ) : !list.length ? (
-              <SearchUserNone />
-            ) : (
-              friendList
-            )}
-          </div>
+          <div>{isLoading === true ? loading : !list.length ? <SearchUserNone /> : friendList}</div>
         </div>
       </div>
     </div>

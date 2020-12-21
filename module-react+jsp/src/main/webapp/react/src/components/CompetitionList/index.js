@@ -21,9 +21,7 @@ const CompetitionList = () => {
     },
   ];
   // 렌더링 변수
-  const competitionList = competitionData.map((x, index) => (
-    <Competition key={index} id={x.id} name={x.name} />
-  ));
+  const competitionList = competitionData.map((x, index) => <Competition key={index} id={x.id} name={x.name} />);
   return <div id="competitionList">{competitionList}</div>;
 };
 
