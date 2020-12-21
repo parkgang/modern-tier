@@ -25,3 +25,4 @@ where friend.kakao_id = 1536694714;
 
 # 삭제
 delete from friend;
+delete from friend where kakao_id = 1536694714 and friend_kakao_id = 1561304829;
