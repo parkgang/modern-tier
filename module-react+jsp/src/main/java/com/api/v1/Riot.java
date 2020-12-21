@@ -21,6 +21,7 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Objects;
 
 @Path("/v1/riot")
 public class Riot {
@@ -186,7 +187,7 @@ public class Riot {
                 while ((line = br.readLine()) != null) {
                     result += line;
                 }
-                System.out.println("response body : " + result);
+                // System.out.println("response body : " + result);
 
                 // json 파싱
                 JSONArray jArray = new JSONArray(result);
@@ -205,30 +206,28 @@ public class Riot {
                 if (jArray.length() != 1)
                     exploreIndex = 1;
 
-                String tier;
-                String rank;
                 // 솔로 랭크 한번도 안돌린 사용자
                 if (jArray.length() == 0) {
-                    tier = null;
-                    rank = null;
+
+                    rankingList.remove(i);
                 } else {
                     JSONObject obj = jArray.getJSONObject(exploreIndex);
-                    tier = obj.getString("tier");
-                    rank = obj.getString("rank");
+                    String tier = obj.getString("tier");
+                    String rank = obj.getString("rank");
+
+                    RankingDTO rankingDTO = new RankingDTO();
+
+                    rankingDTO.setKakao_id(user.getKakao_id());
+                    rankingDTO.setKakao_nickname(user.getKakao_nickname());
+                    rankingDTO.setKakao_profile_image_url(user.getKakao_profile_image_url());
+                    rankingDTO.setRiot_id(user.getRiot_id());
+                    rankingDTO.setRiot_name(user.getRiot_name());
+                    rankingDTO.setRiot_summonerLevel(user.getRiot_summonerLevel());
+                    rankingDTO.setTier(tier);
+                    rankingDTO.setRank(rank);
+
+                    rankingList.set(i, rankingDTO);
                 }
-
-                RankingDTO rankingDTO = new RankingDTO();
-
-                rankingDTO.setKakao_id(user.getKakao_id());
-                rankingDTO.setKakao_nickname(user.getKakao_nickname());
-                rankingDTO.setKakao_profile_image_url(user.getKakao_profile_image_url());
-                rankingDTO.setRiot_id(user.getRiot_id());
-                rankingDTO.setRiot_name(user.getRiot_name());
-                rankingDTO.setRiot_summonerLevel(user.getRiot_summonerLevel());
-                rankingDTO.setTier(tier);
-                rankingDTO.setRank(rank);
-
-                rankingList.set(i, rankingDTO);
             }
 
             JSONArray resJSON = new JSONArray();
@@ -253,21 +252,29 @@ public class Riot {
             };
 
             // 정렬
-            for (int i = 0; i < rankingList.size(); i++) {
-                RankingDTO user = (RankingDTO) rankingList.get(i);
+            for (int tierIndex = 0; tierIndex < tierSortMask.length; tierIndex++) {
+                for (int rankIndex = 0; rankIndex < rankSortMask.length; rankIndex++) {
+                    for (int i = 0; i < rankingList.size(); i++) {
+                        RankingDTO user = (RankingDTO) rankingList.get(i);
+                        String tempTier = user.getTier();
+                        String tempRank = user.getRank();
 
-                JSONObject jsonObject = new JSONObject();
+                        if (Objects.equals(tempTier, tierSortMask[tierIndex]) && Objects.equals(tempRank, rankSortMask[rankIndex])) {
+                            JSONObject jsonObject = new JSONObject();
 
-                jsonObject.put("kakao_id", user.getKakao_id());
-                jsonObject.put("kakao_nickname", user.getKakao_nickname());
-                jsonObject.put("kakao_profile_image_url", user.getKakao_profile_image_url());
-                jsonObject.put("riot_id", user.getRiot_id());
-                jsonObject.put("riot_name", user.getRiot_name());
-                jsonObject.put("riot_summonerLevel", user.getRiot_summonerLevel());
-                jsonObject.put("tier", user.getTier());
-                jsonObject.put("rank", user.getRank());
+                            jsonObject.put("kakao_id", user.getKakao_id());
+                            jsonObject.put("kakao_nickname", user.getKakao_nickname());
+                            jsonObject.put("kakao_profile_image_url", user.getKakao_profile_image_url());
+                            jsonObject.put("riot_id", user.getRiot_id());
+                            jsonObject.put("riot_name", user.getRiot_name());
+                            jsonObject.put("riot_summonerLevel", user.getRiot_summonerLevel());
+                            jsonObject.put("tier", user.getTier());
+                            jsonObject.put("rank", user.getRank());
 
-                resJSON.put(jsonObject);
+                            resJSON.put(jsonObject);
+                        }
+                    }
+                }
             }
 
             return Response.status(Response.Status.OK).entity(resJSON.toString()).build();
@@ -275,7 +282,6 @@ public class Riot {
         } catch (Exception ex) {
             System.out.println("/v1/riot/ranking 에러: " + ex);
         }
-        // http://localhost:8080/api/v1/riot/ranking
         return null;
     }
 }
