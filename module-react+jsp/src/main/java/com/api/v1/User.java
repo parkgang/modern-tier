@@ -162,18 +162,21 @@ public class User {
             JSONArray resJSON = new JSONArray();
 
             for (int i = 0; i < userList.size(); i++) {
-                JSONObject jsonObject = new JSONObject();
-
                 UserDTO user = (UserDTO) userList.get(i);
 
-                boolean isFriend = friendDAO.isWithFriend(kakaoId, user.getKakao_id());
+                // 로그인 사용자는 친구목록에 포함되지 않습니다.
+                if (kakaoId != user.getKakao_id()) {
+                    boolean isFriend = friendDAO.isWithFriend(kakaoId, user.getKakao_id());
 
-                jsonObject.put("kakaoId", user.getKakao_id());
-                jsonObject.put("nickname", user.getKakao_nickname());
-                jsonObject.put("profileImage", user.getKakao_profile_image_url());
-                jsonObject.put("isFriend", isFriend);
+                    JSONObject jsonObject = new JSONObject();
 
-                resJSON.put(jsonObject);
+                    jsonObject.put("kakaoId", user.getKakao_id());
+                    jsonObject.put("nickname", user.getKakao_nickname());
+                    jsonObject.put("profileImage", user.getKakao_profile_image_url());
+                    jsonObject.put("isFriend", isFriend);
+
+                    resJSON.put(jsonObject);
+                }
             }
 
             return Response.status(Response.Status.OK).entity(resJSON.toString()).build();
