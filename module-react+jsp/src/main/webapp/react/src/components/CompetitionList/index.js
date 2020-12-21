@@ -22,7 +22,28 @@ const CompetitionList = () => {
   ];
   // 렌더링 변수
   const competitionList = competitionData.map((x, index) => <Competition key={index} id={x.id} name={x.name} />);
-  return <div id="competitionList">{competitionList}</div>;
+
+  return (
+    <div id="competitionList">
+      <div>
+        <span>론칭 예정 입니다</span>
+      </div>
+      <div>
+        <div>
+          <span>실제 LOL 전적 데이터를 기반으로</span>
+        </div>
+        <div>
+          <span>친구와 함께 경쟁을 할 수 있어요!</span>
+        </div>
+        <div>
+          <span>경쟁에서 이긴 친구는 보상을 받는 시스템 입니다.</span>
+        </div>
+        <div>
+          <span>추후, 업데이트 예정이니 기대해 주세요!</span>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CompetitionList;

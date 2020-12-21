@@ -1,8 +1,17 @@
 #competitionList {
-  /* height: 50px; */
   margin: 10px 10px 10px 10px;
-  border: 2px solid red;
-
+  border-radius: 5px;
   text-align: center;
   line-height: 45px;
+  height: 100%;
+}
+
+#competitionList > div:nth-child(1) {
+  margin-top: 90px;
+  margin-bottom: 30px;
+}
+
+#competitionList > div:nth-child(1) span {
+  font-size: 40px;
+  font-weight: bold;
 }
