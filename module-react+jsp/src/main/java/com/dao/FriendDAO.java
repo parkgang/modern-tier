@@ -61,4 +61,37 @@ public class FriendDAO {
             }
         }
     }
+
+    // 친구 삭제
+    public void friendDelete(int kakaoId, int friendKakaoId) throws Exception {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+
+        try {
+            con = ds.getConnection();
+
+            sql = "delete from friend where kakao_id = ? and friend_kakao_id = ?;";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, kakaoId);
+            pstmt.setInt(2, friendKakaoId);
+
+            pstmt.executeUpdate();
+        } catch (Exception ex) {
+            throw new Exception("friendDelete 에러: ", ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
+    }
 }
