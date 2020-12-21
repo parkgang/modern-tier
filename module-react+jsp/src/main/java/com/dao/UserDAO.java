@@ -314,6 +314,8 @@ public class UserDAO {
             pstmt.setInt(4, summonerDTO.getSummonerLevel());
             pstmt.setInt(5, kakao_id);
             pstmt.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            throw new SQLIntegrityConstraintViolationException("중복되는 아이디가 존재합니다: ", ex);
         } catch (Exception ex) {
             throw new Exception("userRiotInsert 에러: ", ex);
         } finally {
