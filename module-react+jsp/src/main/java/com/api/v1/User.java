@@ -36,7 +36,7 @@ public class User {
             object.put("kakao_id", kakao_id);
             return Response.status(Response.Status.OK).entity(object.toString()).build();
         } catch (NullPointerException ex) {
-            System.out.println("알려진 예외: 세션 값이 없습니다. (로그인 되어있지 않은 사용자 접속)");
+            System.out.println("/v1/user/login 알려진 예외: 세션 값이 없습니다. (로그인 되어있지 않은 사용자 접속, 바로 로그인 페이지로 리다이렉트 되기 때문에 동작에는 문제가 없습니다.)");
         } catch (Exception ex) {
             System.out.println("/v1/user/login 에러: " + ex);
         }
