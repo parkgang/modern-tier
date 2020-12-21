@@ -3,22 +3,36 @@ import PropTypes from 'prop-types';
 
 import './index.css';
 
-const Ranking = ({ id, name, tier }) => {
+const Ranking = ({ key, ranking, kakaoNickname, kakaoProfileImageUrl, riotName, riotProfileIconId, riotSummonerLevel, tier, rank }) => {
   return (
-    <div id={'Ranking' + id} className="ranking">
-      <span>{id}</span>
-      <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span>{name}</span>
-      <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span>{tier}</span>
+    <div id={'Ranking' + key} className="ranking">
+      <span>{ranking + '.'}</span>
+      <span>&nbsp;&nbsp;</span>
+      <img src={kakaoProfileImageUrl} />
+      <span>&nbsp;&nbsp;</span>
+      <img src="/src/resources/icon/ranked-emblems/Emblem_Platinum.png" />
+      <span>&nbsp;&nbsp;</span>
+      <span>{tier + ' ' + rank}</span>
+      <span>&nbsp;&nbsp;</span>
+      <span>{kakaoNickname}</span>
+      <span>&nbsp;&nbsp;</span>
+      <span>{riotName}</span>
+      <span>&nbsp;&nbsp;</span>
+      <span>{riotSummonerLevel}</span>
     </div>
   );
 };
 
 Ranking.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
+  key: PropTypes.number,
+  ranking: PropTypes.string,
+  kakaoNickname: PropTypes.string,
+  kakaoProfileImageUrl: PropTypes.string,
+  riotName: PropTypes.string,
+  riotProfileIconId: PropTypes.string,
+  riotSummonerLevel: PropTypes.string,
   tier: PropTypes.string,
+  rank: PropTypes.string,
 };
 
 export default Ranking;
