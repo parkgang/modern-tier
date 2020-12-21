@@ -10,16 +10,17 @@ import './index.css';
 const friendSelector = (state) => state.friend;
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const { isLoading, list } = useSelector(friendSelector);
+
+  // 화면에 가장 처음 렌더링 될 때만 실행되고 업데이트 할 경우에는 실행 할 필요가 없는 경우 (마운트 될 때만 실행하고 싶을 때, 배열이 blank 이어야 함)
   useEffect(() => {
     dispatch(actions.searchingUser());
     actions.searchUser('').then((res) => {
       dispatch(res);
     });
   }, []);
-
-  const dispatch = useDispatch();
-
-  const { isLoading, list } = useSelector(friendSelector);
 
   // 레이어 팝업 설계의 문제로 생성된 함수 입니다. 다른 팝업이 활성화 되어있으면 종료합니다.
   const popUpController = (mode) => {
