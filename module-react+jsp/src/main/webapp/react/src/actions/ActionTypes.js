@@ -6,3 +6,4 @@ export const LOADING_USER_PROFILE = 'LOADING_USER_PROFILE';
 export const SEARCHING_USER = 'SEARCHING_USER';
 export const SEARCH_USER = 'SEARCH_USER';
 export const ADD_FRIEND = 'ADD_FRIEND';
+export const DEL_FRIEND = 'DEL_FRIEND';

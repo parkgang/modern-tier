@@ -43,3 +43,13 @@ export const addFriend = async (kakaoId) => {
     };
   }
 };
+
+export const delFriend = async (kakaoId) => {
+  const res = await request('get', `/api/v1/friend/del?friendKakaoId=${kakaoId}`);
+  if (res.status === 200) {
+    return {
+      type: types.DEL_FRIEND,
+      kakaoId,
+    };
+  }
+};

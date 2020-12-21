@@ -42,6 +42,18 @@ export default (state = initialState, action) => {
             : x
         ),
       };
+    case types.DEL_FRIEND:
+      return {
+        ...state,
+        list: state.list.map((x) =>
+          x.kakaoId === action.kakaoId
+            ? {
+                ...x,
+                isFriend: false,
+              }
+            : x
+        ),
+      };
     default:
       return state;
   }
