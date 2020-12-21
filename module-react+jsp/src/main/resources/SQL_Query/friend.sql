@@ -22,3 +22,6 @@ select u.*
 from friend
          inner join user u on friend.friend_kakao_id = u.kakao_id
 where friend.kakao_id = 1536694714;
+
+# 삭제
+delete from friend;
