@@ -94,4 +94,39 @@ public class FriendDAO {
             }
         }
     }
+
+    // 친구 관계 확인
+    public boolean isWithFriend(int kakaoId, int friendKakaoId) throws Exception {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+
+        try {
+            con = ds.getConnection();
+
+            sql = "select * from friend where kakao_id = ? and friend_kakao_id = ?;";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, kakaoId);
+            pstmt.setInt(2, friendKakaoId);
+
+            rs = pstmt.executeQuery();
+
+            return rs.next();
+        } catch (Exception ex) {
+            throw new Exception("isWithFriend 에러: ", ex);
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                throw new Exception("DB종료 실패: ", ex);
+            }
+        }
+    }
 }

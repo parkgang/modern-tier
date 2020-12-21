@@ -1,5 +1,6 @@
 package com.api.v1;
 
+import com.dao.FriendDAO;
 import com.dao.UserDAO;
 import com.dto.UserDTO;
 import org.json.JSONArray;
@@ -151,6 +152,10 @@ public class User {
     // 사용자 검색
     public Response search(@Context HttpServletRequest req, @QueryParam("kakaoNickname") String kakaoNickname) {
         try {
+            int kakaoId = (int) req.getSession().getAttribute("kakao_id");
+
+            FriendDAO friendDAO = FriendDAO.getInstance();
+
             UserDAO userDAO = UserDAO.getInstance();
             List userList = userDAO.userSearch(kakaoNickname);
 
@@ -161,11 +166,12 @@ public class User {
 
                 UserDTO user = (UserDTO) userList.get(i);
 
+                boolean isFriend = friendDAO.isWithFriend(kakaoId, user.getKakao_id());
+
                 jsonObject.put("kakaoId", user.getKakao_id());
                 jsonObject.put("nickname", user.getKakao_nickname());
                 jsonObject.put("profileImage", user.getKakao_profile_image_url());
-                // TODO: 로그인한 user와 친구관계를 확인하는 로직이 추가되어야합니다.
-                jsonObject.put("isFriend", false);
+                jsonObject.put("isFriend", isFriend);
 
                 resJSON.put(jsonObject);
             }
