@@ -10,16 +10,17 @@ import './index.css';
 const friendSelector = (state) => state.friend;
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const { keyword, isLoading, list } = useSelector(friendSelector);
+
+  // 화면에 가장 처음 렌더링 될 때만 실행되고 업데이트 할 경우에는 실행 할 필요가 없는 경우 (마운트 될 때만 실행하고 싶을 때, 배열이 blank 이어야 함)
   useEffect(() => {
     dispatch(actions.searchingUser());
     actions.searchUser('').then((res) => {
       dispatch(res);
     });
   }, []);
-
-  const dispatch = useDispatch();
-
-  const { isLoading, list } = useSelector(friendSelector);
 
   // 레이어 팝업 설계의 문제로 생성된 함수 입니다. 다른 팝업이 활성화 되어있으면 종료합니다.
   const popUpController = (mode) => {
@@ -41,7 +42,9 @@ const Header = () => {
   });
 
   // 렌더링 변수
-  const friendList = list.map((x, index) => <SearchUser key={index} kakaoId={x.kakaoId} nickname={x.nickname} profileImage={x.profileImage} isFriend={x.isFriend} />);
+  const friendList = list.map((x, index) => (
+    <SearchUser key={index} kakaoId={x.kakaoId} nickname={x.nickname} profileImage={x.profileImage} isFriend={x.isFriend} />
+  ));
 
   return (
     <div id="header">
@@ -93,7 +96,27 @@ const Header = () => {
               });
             }}
           />
-          <div>{isLoading === true ? loading : !list.length ? <SearchUserNone /> : friendList}</div>
+          <div>
+            {isLoading === true ? (
+              loading
+            ) : !list.length ? (
+              !keyword.trim() ? (
+                <SearchUserNone
+                  title={'친구가 없습니다'}
+                  content1={'친구를 검색해 주세요'}
+                  content2={'모르는 친구가 있다면 권유해보는 건 어떨까요?'}
+                />
+              ) : (
+                <SearchUserNone
+                  title={'검색된 사용자가 없습니다!'}
+                  content1={'가입된 사용자만 친구 추가가 가능합니다.'}
+                  content2={'친구에게 가입을 권유해보는 건 어떨까요?'}
+                />
+              )
+            ) : (
+              friendList
+            )}
+          </div>
         </div>
       </div>
     </div>

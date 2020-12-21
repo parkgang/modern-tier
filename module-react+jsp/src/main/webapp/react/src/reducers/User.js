@@ -22,7 +22,8 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         nickName: action.payload.nickName,
-        profileImage: action.payload.profileImage === undefined ? '/react/src/resources/img/kakaoTalk-default-profile.jpg' : action.payload.profileImage,
+        profileImage:
+          action.payload.profileImage === undefined ? '/react/src/resources/img/kakaoTalk-default-profile.jpg' : action.payload.profileImage,
       };
     default:
       return state;

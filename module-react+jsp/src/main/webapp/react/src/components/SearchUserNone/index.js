@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './index.css';
 
@@ -14,23 +15,32 @@ const kakaoLinkSend = () => {
   });
 };
 
-const SearchUserNone = () => {
+const SearchUserNone = ({ title, content1, content2 }) => {
   return (
     <div id="search-user-none">
       <div>
-        <span>검색된 사용자가 없습니다!</span>
+        <span>{title}</span>
       </div>
       <div>
-        <div>서비스에 가입된 사용자만 친구 추가가 가능합니다.</div>
-        <div>친구에게 초대를 권유해보는 건 어떨까요?</div>
+        <div>{content1}</div>
+        <div>{content2}</div>
       </div>
       <div>
         <button onClick={kakaoLinkSend}>
           <img src="/react/src/resources/img/kakaolink_btn_small.png" />
         </button>
       </div>
+      <div>
+        <span>버튼을 눌러 공유하기</span>
+      </div>
     </div>
   );
+};
+
+SearchUserNone.propTypes = {
+  title: PropTypes.string,
+  content1: PropTypes.string,
+  content2: PropTypes.string,
 };
 
 export default SearchUserNone;

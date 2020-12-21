@@ -1,5 +1,6 @@
 package com.api.v1;
 
+import com.dao.FriendDAO;
 import com.dao.UserDAO;
 import com.dto.UserDTO;
 import org.json.JSONArray;
@@ -35,7 +36,7 @@ public class User {
             object.put("kakao_id", kakao_id);
             return Response.status(Response.Status.OK).entity(object.toString()).build();
         } catch (NullPointerException ex) {
-            System.out.println("알려진 예외: 세션 값이 없습니다. (로그인 되어있지 않은 사용자 접속)");
+            System.out.println("/v1/user/login 알려진 예외: 세션 값이 없습니다. (로그인 되어있지 않은 사용자 접속, 바로 로그인 페이지로 리다이렉트 되기 때문에 동작에는 문제가 없습니다.)");
         } catch (Exception ex) {
             System.out.println("/v1/user/login 에러: " + ex);
         }
@@ -151,23 +152,41 @@ public class User {
     // 사용자 검색
     public Response search(@Context HttpServletRequest req, @QueryParam("kakaoNickname") String kakaoNickname) {
         try {
+            kakaoNickname = kakaoNickname.trim();
+
+            int kakaoId = 0;
+            try {
+                kakaoId = (int) req.getSession().getAttribute("kakao_id");
+            } catch (NullPointerException ex) {
+                System.out.println("/v1/user/search 알려진 예외: 세션 값이 없습니다. (로그인 전 렌더링 되면서 생기는 이슈, 실제 사용은 로그인 이후라 동작에는 문제가 없습니다.)");
+            }
+
+            FriendDAO friendDAO = FriendDAO.getInstance();
+
             UserDAO userDAO = UserDAO.getInstance();
             List userList = userDAO.userSearch(kakaoNickname);
 
             JSONArray resJSON = new JSONArray();
 
             for (int i = 0; i < userList.size(); i++) {
-                JSONObject jsonObject = new JSONObject();
-
                 UserDTO user = (UserDTO) userList.get(i);
 
-                jsonObject.put("kakaoId", user.getKakao_id());
-                jsonObject.put("nickname", user.getKakao_nickname());
-                jsonObject.put("profileImage", user.getKakao_profile_image_url());
-                // TODO: 로그인한 user와 친구관계를 확인하는 로직이 추가되어야합니다.
-                jsonObject.put("isFriend", false);
+                // 로그인 사용자는 친구목록에 포함되지 않습니다.
+                if (kakaoId != user.getKakao_id()) {
+                    boolean isFriend = friendDAO.isWithFriend(kakaoId, user.getKakao_id());
 
-                resJSON.put(jsonObject);
+                    // 빈값을 입력하면 등록된 친구만 출력합니다.
+                    if (!kakaoNickname.isEmpty() || isFriend) {
+                        JSONObject jsonObject = new JSONObject();
+
+                        jsonObject.put("kakaoId", user.getKakao_id());
+                        jsonObject.put("nickname", user.getKakao_nickname());
+                        jsonObject.put("profileImage", user.getKakao_profile_image_url());
+                        jsonObject.put("isFriend", isFriend);
+
+                        resJSON.put(jsonObject);
+                    }
+                }
             }
 
             return Response.status(Response.Status.OK).entity(resJSON.toString()).build();
