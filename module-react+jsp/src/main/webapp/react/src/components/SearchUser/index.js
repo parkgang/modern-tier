@@ -15,9 +15,37 @@ const SearchUser = ({ kakaoId, nickname, profileImage, isFriend }) => {
       <span>{nickname}</span>
       <div>
         {isFriend === false ? (
-          <button onClick={() => actions.addFriend(kakaoId).then((result) => dispatch(result))}>친구 추가</button>
+          <button
+            onClick={() => {
+              actions
+                .addFriend(kakaoId)
+                .then((result) => dispatch(result))
+                .then(() => {
+                  dispatch(actions.loadingRanking());
+                  actions.reqRanking().then((res) => {
+                    dispatch(res);
+                  });
+                });
+            }}
+          >
+            친구 추가
+          </button>
         ) : (
-          <button onClick={() => actions.delFriend(kakaoId).then((result) => dispatch(result))}>친구 삭제</button>
+          <button
+            onClick={() => {
+              actions
+                .delFriend(kakaoId)
+                .then((result) => dispatch(result))
+                .then(() => {
+                  dispatch(actions.loadingRanking());
+                  actions.reqRanking().then((res) => {
+                    dispatch(res);
+                  });
+                });
+            }}
+          >
+            친구 삭제
+          </button>
         )}
       </div>
     </div>

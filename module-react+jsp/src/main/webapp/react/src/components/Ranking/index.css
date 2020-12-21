@@ -1,8 +1,15 @@
 .ranking {
-  height: 50px;
-  margin: 10px 10px 10px 10px;
-  border: 2px solid black;
+  height: 80px;
+  margin: 10px 3px 10px 3px;
+  padding: 10px;
+  border: 1px solid rgb(162, 142, 235);
+  border-radius: 5px;
+  font-size: 12px;
+}
 
-  text-align: center;
-  line-height: 45px;
+.ranking img {
+  width: 45px;
+  height: 45px;
+  vertical-align: middle;
+  border-radius: 40%;
 }

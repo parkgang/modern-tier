@@ -1,8 +1,22 @@
 #tabNavigator {
   height: 50px;
-  margin: 10px 10px 10px 10px;
-  border: 2px solid black;
-
   text-align: center;
-  line-height: 45px;
+  line-height: 50px;
+  box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.05), 0 30px 30px rgba(118, 20, 230, 0.1);
+}
+
+#tabNavigator a {
+  text-decoration: none;
+  color: #202020;
+  font-size: 18px;
+  font-weight: lighter;
+}
+
+#tabNavigator ul li {
+  display: inline-block;
+  width: 50%;
+}
+
+#tabNavigator .tab-select {
+  font-weight: bold;
 }

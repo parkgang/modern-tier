@@ -53,3 +53,15 @@ export const delFriend = async (kakaoId) => {
     };
   }
 };
+
+export const loadingRanking = () => ({
+  type: types.LOADING_RANKING,
+});
+
+export const reqRanking = async () => {
+  const ranking = await request('get', `/api/v1/riot/ranking`);
+  return {
+    type: types.REQUEST_RANKING,
+    payload: ranking.data,
+  };
+};
