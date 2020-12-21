@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.constant.Service;
+import com.dto.RankingDTO;
 import com.dto.SummonerDTO;
 import com.dto.UserDTO;
 
@@ -380,6 +381,79 @@ public class UserDAO {
             } catch (Exception ex) {
                 System.out.println("isUniqueSummoner DB종료 실패: " + ex);
                 throw new Exception("isUniqueSummoner DB종료 실패");
+            }
+        }
+    }
+
+    // 사용자와 사용자 친구의 데이터 조회
+    public List userFriend(int kakao_id) throws Exception {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = null;
+
+        List list = new ArrayList();
+        try {
+            con = ds.getConnection();
+
+            // 로그인 사용자 조회
+            sql = "select * from user where kakao_id = ?;";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, kakao_id);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                RankingDTO rankingDTO = new RankingDTO();
+
+                rankingDTO.setKakao_id(rs.getInt("kakao_id"));
+                rankingDTO.setKakao_nickname(rs.getString("kakao_nickname"));
+                rankingDTO.setKakao_profile_image_url(rs.getString("kakao_profile_image_url"));
+                rankingDTO.setRiot_id(rs.getString("riot_id"));
+                rankingDTO.setRiot_name(rs.getString("riot_name"));
+                rankingDTO.setRiot_summonerLevel(rs.getInt("riot_summonerLevel"));
+
+                list.add(rankingDTO);
+            }
+
+            // 로그인 사용자 친구 조회
+            sql = "select u.* from friend inner join user u on friend.friend_kakao_id = u.kakao_id where friend.kakao_id = ?;";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, kakao_id);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                // 방어코딩: 롤 계정이 등록되어있지 않으면 pass
+                if (rs.getString("riot_id") != null) {
+                    RankingDTO rankingDTO = new RankingDTO();
+
+                    rankingDTO.setKakao_id(rs.getInt("kakao_id"));
+                    rankingDTO.setKakao_nickname(rs.getString("kakao_nickname"));
+                    rankingDTO.setKakao_profile_image_url(rs.getString("kakao_profile_image_url"));
+                    rankingDTO.setRiot_id(rs.getString("riot_id"));
+                    rankingDTO.setRiot_name(rs.getString("riot_name"));
+                    rankingDTO.setRiot_summonerLevel(rs.getInt("riot_summonerLevel"));
+
+                    list.add(rankingDTO);
+                }
+            }
+
+            return list;
+        } catch (Exception ex) {
+            System.out.println("userFriend 에러: " + ex);
+            throw new Exception("userFriend 에러");
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (con != null)
+                    con.close();
+            } catch (Exception ex) {
+                System.out.println("userFriend DB종료 실패: " + ex);
+                throw new Exception("userFriend DB종료 실패");
             }
         }
     }
