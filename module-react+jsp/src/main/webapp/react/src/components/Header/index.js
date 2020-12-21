@@ -41,7 +41,9 @@ const Header = () => {
   });
 
   // 렌더링 변수
-  const friendList = list.map((x, index) => <SearchUser key={index} kakaoId={x.kakaoId} nickname={x.nickname} profileImage={x.profileImage} isFriend={x.isFriend} />);
+  const friendList = list.map((x, index) => (
+    <SearchUser key={index} kakaoId={x.kakaoId} nickname={x.nickname} profileImage={x.profileImage} isFriend={x.isFriend} />
+  ));
 
   return (
     <div id="header">
