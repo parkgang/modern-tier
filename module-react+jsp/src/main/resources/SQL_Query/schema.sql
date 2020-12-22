@@ -10,7 +10,7 @@ CREATE TABLE user
     id                      INT(11) NOT NULL AUTO_INCREMENT,
     kakao_id                INT     NOT NULL UNIQUE,
     kakao_nickname          VARCHAR(20),
-    kakao_email             VARCHAR(20),
+    kakao_email             VARCHAR(100),
     kakao_profile_image_url VARCHAR(100),
     kakao_access_token      VARCHAR(60),
     kakao_refresh_token     VARCHAR(60),
