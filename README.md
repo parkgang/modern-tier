@@ -56,6 +56,10 @@ docker run -p 8888:8080 tomcat-modern-tier:1
 
 `node_modules/.bin/eslint --init`
 
+## 현재 프로젝트에 적용된 setting
+
+<img width="1420" alt="스크린샷 2020-12-07 오전 3 50 30" src="https://user-images.githubusercontent.com/63892989/103026894-32873780-4598-11eb-89e5-41782241ec86.png">
+
 # 이슈
 
 Kakao OAuth Redirect URI이 도메인이 아닌 public IP으로 넘어가서 서비스 접속시 public IP으로 들어가야합니다
