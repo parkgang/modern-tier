@@ -1,0 +1,8 @@
+.competition {
+  height: 50px;
+  margin: 10px 10px 10px 10px;
+  border: 2px solid black;
+
+  text-align: center;
+  line-height: 45px;
+}

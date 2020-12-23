@@ -1,0 +1,22 @@
+#search-user-none {
+  text-align: center;
+  padding: 10px 10px 10px 10px;
+}
+#search-user-none > div:nth-child(1) {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+#search-user-none > div:nth-child(2) {
+  margin-bottom: 40px;
+  font-size: 12px;
+}
+#search-user-none button {
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+  margin-bottom: 5px;
+}
+#search-user-none > div:nth-child(4) {
+  font-size: 10px;
+}
