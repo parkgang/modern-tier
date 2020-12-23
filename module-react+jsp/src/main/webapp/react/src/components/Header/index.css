@@ -1,0 +1,100 @@
+#header {
+  width: 100%;
+  height: 60px;
+  z-index: 2000;
+  background-color: #fff;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+#header a {
+  display: inline-block;
+  height: 36px;
+  margin: 12px 0 12px 25px;
+}
+#header a > img {
+  height: 36px;
+  border-radius: 20%;
+}
+
+.burger-menu {
+  float: right;
+  position: relative;
+  margin: 18px 25px 18px 0;
+}
+.burger-menu > input {
+  display: none;
+}
+.burger-menu > label {
+  cursor: pointer;
+}
+
+#burger-menu-list {
+  display: none;
+  background-color: white;
+  width: 100px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 3px;
+}
+#burger-menu-list ul {
+  list-style: none;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+#burger-menu-list ul button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#burger-menu-toggle:checked ~ #burger-menu-list {
+  display: block;
+  position: absolute;
+  top: calc(24px + 10px);
+  left: calc(24px + -95px);
+}
+
+/* 팝업 부모 위치 정의 */
+.add-friend {
+  float: right;
+  position: relative;
+  margin: 18px 25px 18px 0;
+}
+.add-friend > input {
+  display: none;
+}
+.add-friend > label {
+  cursor: pointer;
+}
+
+#friend-list {
+  display: none;
+  background-color: white;
+  width: 270px;
+  height: 350px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 3px;
+}
+#friend-list input {
+  display: block;
+  margin: 0 auto;
+  width: 93%;
+  height: 25px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+#friend-list > div {
+  list-style: none;
+  height: 300px;
+  overflow: scroll;
+}
+
+/* 팝업 위치 정의 */
+#add-friend-toggle:checked ~ #friend-list {
+  display: block;
+  position: absolute;
+  top: calc(24px + 10px);
+  left: calc(24px + -260px);
+}
